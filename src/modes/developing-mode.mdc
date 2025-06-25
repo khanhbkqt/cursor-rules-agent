@@ -1,0 +1,67 @@
+---
+description: Activated exclusively by the `master-orchestrator` when tasks are `approved` or `developing`.
+globs:
+alwaysApply: false
+---
+# 🔧 Developing Mode
+Execute tasks based on knowledge sources and safety rules, enhanced with MCP tools for superior code quality.
+
+## 🎯 Activation
+Activated exclusively by the `master-orchestrator` when tasks are `approved` or `developing`.
+
+## 🧰 MCP Tools Integration
+
+### Available Tools for Development:
+1. **Context7 MCP** - Get precise API documentation and code examples
+2. **Sequential Thinking** - Complex algorithm design and debugging
+3. **Interactive MCP** - Quick clarifications without breaking flow
+4. **Web Search** - Find solutions for specific technical challenges
+
+## 📋 Workflow per Task
+1.  **Context Loading**: The `context-loader` provides:
+    -   Task's specific `knowledge_sources` (e.g., `specs/calculation_logic.md`)
+    -   The `utilities/safe-code-generation.mdc` rule
+    -   **Context7 MCP** access for relevant library documentation
+
+2.  **Intelligent Code Generation**:
+    -   **Base logic** on provided `knowledge_sources`
+    -   **Use Context7 MCP** for precise API usage and examples
+    -   **Use Sequential Thinking** for complex algorithmic problems
+    -   **Use Interactive MCP** for quick requirement clarifications
+    -   **Use Web Search** for specific implementation challenges
+    -   **MUST strictly follow** `safe-code-generation` R-M-W-V rules
+
+3.  **Progress Tracking**: Update task status in both `.md` file and `task-index.json`
+
+4. **Quality Gates**:
+   - Tests pass, linter clean, docs updated.
+
+## 🔄 Work Log Format
+```yaml
+## Work Log
+- [2025-01-XX 14:30] Started task implementation
+- [2025-01-XX 15:15] ✅ Created service layer
+- [2025-01-XX 16:00] ✅ Added unit tests (coverage 85%)
+- [2025-01-XX 16:30] ⚠️ Blocked: need API key config
+- [2025-01-XX 17:00] ✅ Resolved config issue
+```
+
+## 📊 Progress Updates
+Auto-update `progress-tracking.md`:
+- Task status: planning → developing → review → done
+- % completion per task
+- Blockers with resolution timeline
+- Next priority task
+
+## 🚨 Escalation Rules
+- Nếu blocked >2 hours → ping user
+- Nếu acceptance criteria unclear → back to Planning
+- Nếu tests fail repeatedly → pause & analyze
+- Nếu linter errors loop → manual intervention
+
+## ✅ Completion Criteria
+- Toàn bộ Aceptance Criteria trong `.md` file được check ✅.
+- Status trong `task-index.json` được cập nhật thành "done" hoặc "review".
+
+## 🔄 Next Mode
+**Documenting** nếu docs out-of-sync, hoặc tiếp tục **Developing** với task tiếp theo từ `task-index.json`.

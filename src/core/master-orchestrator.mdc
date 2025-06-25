@@ -1,0 +1,100 @@
+---
+description: Orchestrate the entire workflow by **determining a single active mode** based on the project state.
+priority: 95
+alwaysApply: true
+---
+# 🧭 Master Orchestrator (v4 - Deterministic)
+Orchestrate the entire workflow by **determining a single active mode** based on the project state.
+
+## 🤖 **Mode Detection Logic (Distributed)**
+The agent MUST check these conditions by **iterating through all feature-specific index files**.
+
+### 0. Check for `Brainstorming` Mode (Manual or Pending Blueprint)
+*   `IF` the user explicitly starts a brainstorming session (command contains the keyword `brainstorm` **OR**
+    the shared `orchestrator_state.brainstorm_requested` flag is `true`) **OR**
+*   `IF` a feature directory exists in `docs/features/*/requirements/` **BUT**
+    there is **no** corresponding blueprint file in `docs/blueprints/*.blueprint.yaml` **AND**
+    the root `docs/tasks/task-index.json` does **NOT** yet list tasks for that feature:
+    *   `THEN` **CURRENT_MODE = Brainstorming**. Exit detection.
+
+### 1. Check for `Initializing` Mode
+-   `IF` `docs/tasks/task-index.json` does not exist:
+-   `THEN` **CURRENT_MODE = Initializing**. Exit detection.
+
+### 2. Check for `Developing` Mode
+-   `READ` root `docs/tasks/task-index.json`.
+-   **`FOR EACH`** feature in `features` array:
+    -   `READ` the feature-specific index file from `feature.path`.
+    -   `IF` any task has `status: "approved"` OR `status: "developing"`:
+        -   `THEN` **CURRENT_MODE = Developing**. Exit detection.
+
+### 3. Check for `Documenting` Mode
+-   `READ` root `docs/tasks/task-index.json`.
+-   **`FOR EACH`** feature in `features` array:
+    -   `READ` the feature-specific index file from `feature.path`.
+    -   `IF` any task has `status: "done"` OR `status: "review"` AND docs are out-of-sync:
+        -   `THEN` **CURRENT_MODE = Documenting**. Exit detection.
+
+### 4. Default to `Planning` Mode
+-   `IF` none of the above conditions are met:
+-   `THEN` **CURRENT_MODE = Planning**. This is the default state for a ready project with no active tasks.
+
+## 🛠 Core Workflow (Updated)
+1.  **DETERMINE CURRENT_MODE** using the Mode Detection Logic above.
+2.  **LOAD CONTEXT** via `context-loader`, passing in the determined `CURRENT_MODE`.
+3.  **EXECUTE** user request within the context of the single active mode.
+4.  **UPDATE PROGRESS** in `task-index.json` and relevant files.
+5.  **TRANSITION** if necessary, by updating state that the next detection cycle will pick up.
+
+## 🔄 Mode Transition Philosophy
+**Modes are flexible workflows, NOT linear cycles.**
+
+### Dynamic Transitions:
+- **Developing → Planning**: When user requests a new feature, or detects a need for spec updates
+- **Planning → Developing**: When blueprint is ready and user starts a task
+- **Developing → Documenting**: When a task is completed and docs need updating
+- **Documenting → Planning**: When writing docs detects gaps in requirements
+- **Any Mode → Initializing**: When project structure is broken or reset
+
+### Triggers for Mode Changes:
+1. **User explicit request**: "Plan new feature X", "Start coding TASK_Y"
+2. **Project state changes**: Task status updates, missing files, blueprint approvals
+3. **Validation failures**: Missing specs → back to Planning, incomplete tests → stay in Developing
+4. **Context requirements**: Need different utilities/rules for current work
+
+## 🔒 Enforcement
+- Prohibit code generation if blueprint is not Gate 1.
+- Prohibit marking task complete if tests/docs are missing.
+- Violation ⇒ warn & auto-switch to appropriate mode.
+Detailed in `utilities/enforcer.mdc`
+
+## 📂 Mode-Specific Rules Mapping
+Each mode MUST load its corresponding rule file:
+- **Initializing Mode** → `modes/initializing-mode.mdc`
+- **Planning Mode** → `modes/planning-agent.mdc`  
+- **Developing Mode** → `modes/developing-mode.mdc`
+- **Documenting Mode** → `modes/documenting-mode.mdc`
+- **Brainstorming Mode** → `modes/brainstorming-mode.mdc`
+
+The `context-loader` is responsible for loading these based on `CURRENT_MODE`. These mode files contain:
+- Specific behaviors and constraints for that mode
+- Required utilities to trigger-load
+- Output format guidelines
+- Transition criteria
+
+## 📏 Documentation Freshness Heuristic
+For a given feature, docs are considered **out-of-sync** when **any** source code file under that feature's directory tree has a last-modified timestamp newer than the most recent `.md` file in `docs/features/<feature>/`.
+
+Implementation sketch:
+```
+latest_code_time = max(mtime of src/** for feature)
+latest_doc_time  = max(mtime of docs/features/<feature>/**/*.md)
+return latest_code_time > latest_doc_time
+```
+
+## 🔄 Auto-Transition: `proposed` → `developing`
+Before executing user intent that references a task in `proposed` status:
+1. Verify task's `knowledge_sources` exist (context-loader handles this).
+2. If valid, update status to `developing` **and persist** in `task-index.json`.
+3. Log the transition for audit.
+4. If missing specs, remain in Planning; context-loader already notifies user.

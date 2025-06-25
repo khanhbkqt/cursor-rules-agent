@@ -1,0 +1,134 @@
+---
+description: Initialize and analyze new feature ideas before transitioning to Planning, leveraging advanced MCP tools for comprehensive ideation.
+globs:
+alwaysApply: false
+---
+# 💡 Brainstorming Mode
+Initialize and analyze new feature ideas before transitioning to Planning, leveraging advanced MCP tools for comprehensive ideation.
+
+## 🎯 Activation
+- Automatically by `master-orchestrator` when detecting feature requests without Blueprint/Tasks
+- Manually: user types "start brainstorming" or "@brainstorm"
+
+## 🧰 Enhanced MCP Tools Integration
+
+### Required Tools for This Mode:
+1. **Sequential Thinking** - For structured ideation process
+2. **Web Search** - For market research and trend analysis  
+3. **Context7 MCP** - For technology and library exploration
+4. **Interactive MCP** - For real-time stakeholder validation
+
+## 📋 Objectives
+1. Collect raw ideas/requirements from user using **Interactive MCP**
+2. Research market trends and best practices via **Web Search**
+3. Explore available technologies and libraries through **Context7**
+4. Use **Sequential Thinking** for systematic analysis (MoSCoW/Kano/Value vs Effort)
+5. Generate **Idea Backlog** (`docs/ideas/idea-backlog.md`)
+6. For selected ideas → generate Blueprint framework (`templates/blueprint-template.yaml`)
+7. Preliminary estimation (story points + complexity) & Risk/Benefit analysis
+8. Conclude: transition to **Planning Mode** for detailed blueprint and task creation
+
+## 🛠 Enhanced Workflow with MCP Tools
+
+### Phase 1: Research & Discovery
+1. **Initial Requirements Gathering** (Interactive MCP)
+   - Ask guided questions (Who, What, Why, Success Criteria)
+   - Use Interactive MCP for real-time clarification without breaking flow
+   - Record in `## Raw Notes` section of Idea Backlog
+
+2. **Market Research** (Web Search + Sequential Thinking)
+   - Use Sequential Thinking to structure research approach
+   - Use Web Search to find:
+     - Current market trends in the domain
+     - Competitor analysis and feature gaps
+     - Industry best practices and standards
+     - Recent technological developments
+
+3. **Technology Exploration** (Context7 MCP)
+   - Research relevant libraries and frameworks
+   - Explore API capabilities and limitations
+   - Identify technology dependencies and requirements
+
+### Phase 2: Analysis & Prioritization
+4. **Systematic Analysis** (Sequential Thinking)
+   - Use Sequential Thinking for comprehensive evaluation:
+     - MoSCoW prioritization (Must, Should, Could, Won't)
+     - Kano model analysis (Basic, Performance, Excitement features)
+     - Value vs Effort matrix
+     - Risk assessment with mitigation strategies
+
+5. **Stakeholder Validation** (Interactive MCP)
+   - Present findings and get real-time feedback
+   - Validate assumptions and priorities
+   - Refine ideas based on stakeholder input
+
+### Phase 3: Documentation & Transition
+6. **Generate Blueprint Draft**
+   - For `must` or `should` ideas, create `<Feature>.blueprint.yaml` (Gate 0)
+   - Set `gate_status: 0` with TODO items in all sections
+   - Include research findings and technology choices
+
+7. **Comprehensive Analysis Table**
+   | Idea | Effort (SP) | Value | Complexity | Risk | Tech Stack | Market Trend |
+   |------|-------------|-------|------------|------|------------|--------------|
+
+8. **Output Summary**
+   - Present prioritized idea table with research insights
+   - Highlight top-N recommendations for Planning transition
+   - Include implementation roadmap and next steps
+
+## 📑 Enhanced Idea Backlog Template
+```md
+# 📒 Idea Backlog
+
+## Raw Notes
+- [Date] User requirement: ...
+- [Date] Clarification via Interactive MCP: ...
+
+## Market Research Findings
+### Technology Trends (Web Search)
+- Current market direction: ...
+- Competitor analysis: ...
+- Industry standards: ...
+
+### Technology Options (Context7)
+- Available libraries: ...
+- Framework considerations: ...
+- API capabilities: ...
+
+## Systematic Analysis (Sequential Thinking)
+### MoSCoW Prioritization
+- **Must have**: Critical features for MVP
+- **Should have**: Important but not critical
+- **Could have**: Nice to have features
+- **Won't have**: Out of scope for now
+
+### Comprehensive Evaluation
+| Idea | Effort (SP) | Value | Complexity | Risk | Tech Stack | Market Validation |
+|------|-------------|-------|------------|------|------------|-------------------|
+| Feature A | 8 | High | Medium | Low | React, Node.js | Strong demand |
+| Feature B | 5 | Medium | Low | Medium | Python, FastAPI | Emerging trend |
+
+## Stakeholder Validation
+- [Interactive MCP] Feedback on priorities: ...
+- [Interactive MCP] Risk concerns: ...
+- [Interactive MCP] Timeline constraints: ...
+
+## Approved Ideas for Planning
+- [Feature Name]: Ready for blueprint creation
+```
+
+## 🔄 Transition Strategy
+- When user selects **Approve Ideas** → Orchestrator sets `brainstorm_requested = false`, switch to `CURRENT_MODE = Planning`
+- Include MCP research findings in blueprint creation
+- Transfer technology choices and risk analysis to planning phase
+
+## 🚨 Enhanced Guardrails
+- No code generation during brainstorming
+- No writes to `src/` directory
+- Only create/modify files in `docs/` (especially `docs/ideas/`) or `docs/blueprints/`
+- **MCP Tool Usage Rules**:
+  - Use Web Search responsibly (avoid excessive API calls)
+  - Context7 queries should be focused and relevant
+  - Interactive MCP should not interrupt user flow unnecessarily
+  - Sequential Thinking should be proportional to problem complexity

@@ -1,0 +1,39 @@
+---
+description: This mode is activated **exclusively** by the `master-orchestrator`'s detection logic when `docs/tasks/task-index.json` is missing.
+globs:
+alwaysApply: false
+---
+# 🚀 Initializing Mode
+Initialize project structure, including `task-index.json` and `specs/` directory for deep documentation.
+
+## 🎯 Activation
+This mode is activated **exclusively** by the `master-orchestrator`'s detection logic when `docs/tasks/task-index.json` is missing.
+
+## 📁 Project Structure
+```
+docs/
+|-- blueprints/
+├── features/
+│   └── F01_Example/
+│       ├── requirements/  <-- NEW directory for deep documentation
+│       └── specs/
+│           └── ...
+│       └── task-index.feature.json
+├── tasks/
+│   ├── active/
+│   └── task-index.json
+...
+```
+
+## ⚙️ Scaffold process
+1. **Create folders**: according to the structure above.
+2. **Generate `task-index.json`** from `templates/task-index-template.json`.
+3. **Generate `task-index.feature.json`** from `templates/task-index-feature-template.json`.
+4. **Set completion flag** to orchestrator to switch mode.
+
+## 🔄 Next mode
+**Planning** - a transition which will be automatically detected by the orchestrator.
+
+
+## 🔄 Next mode
+**Planning** - to start decomposing features into tasks.

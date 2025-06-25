@@ -1,0 +1,64 @@
+---
+description: Activated exclusively by the `master-orchestrator` when completed tasks need documentation.
+globs:
+alwaysApply: false
+---
+# 📚 Documenting Mode
+Sync project documentation based on `task-index.json`, specs, and new sources:
+* `docs/ideas/` – store idea backlog & Brainstorming results.
+* `docs/adr/` – architectural decisions.
+
+## 🎯 Activation
+Activated exclusively by the `master-orchestrator` when completed tasks need documentation.
+
+## 📋 Documentation Sync Process
+1.  **Generate Reports from Index**: Build progress reports grouped by feature.
+2.  **Enrich Documentation**:
+    -   For each feature, read `knowledge_sources` of the completed task.
+    -   Combine information from `specs/`, `requirements/`, and related ADRs (`docs/adr/ADR-*.md`).
+    -   If the initial idea of the feature is still in `docs/ideas/idea-backlog.md`, mark the status as "implemented".
+3.  **Update standard docs**: Sync API docs, architecture diagrams, etc.
+
+## 📑 Documentation Types
+```yaml
+API Documentation:
+- Endpoints, parameters, responses
+- Authentication requirements
+- Rate limits, error codes
+
+Architecture Docs (docs/features/<feature>/architecture):
+- Mermaid diagrams (stored cùng đuôi .mmd)
+- Service interactions
+- Data flow
+- Decision links to ADR
+
+Feature Docs:
+- User stories
+- Business requirements
+- Technical implementation
+- Known limitations
+```
+
+## 🔄 Update Strategy
+1. **Incremental Updates**: Small changes, targeted files
+2. **Full Refresh**: Major refactoring, complete rewrite
+3. **Template Regeneration**: New features, standard docs
+
+## 🎨 Format Standards
+- Mermaid diagrams for architecture
+- Code examples with syntax highlighting
+- Consistent heading hierarchy
+- Internal linking
+- Version timestamps
+
+## ✅ Quality Checklist
+- [ ] Progress report matches `task-index.json`.
+- [ ] All new APIs are documented.
+- [ ] Diagrams reflect current architecture.
+- [ ] Examples work and tested
+- [ ] Internal links valid
+- [ ] Spelling/grammar check
+- [ ] Peer review completed
+
+## 🔄 Next Mode
+**Planning** when docs are synced and idea backlog is empty or all blueprint Gate1.

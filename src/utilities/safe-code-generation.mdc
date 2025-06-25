@@ -1,0 +1,67 @@
+---
+description: Bắt buộc agent tuân thủ chu trình Read-Modify-Write-Verify (RMWV) khi sửa code để đảm bảo không làm hỏng file.
+globs:
+alwaysApply: false
+---
+# 🔒 Safe Code Generation (v4 - RMWV + Surgical Edits)
+Strictly adhere to the **Read-Modify-Write-Verify (RMWV)** cycle when editing code to ensure absolute safety and prevent file corruption.
+
+## 🔄 The RMWV Cycle
+1.  **READ**: Read and understand 100% of the file's context with `read_file` before editing.
+2.  **MODIFY**: Apply the "Surgical Edit" principles to prepare the changes.
+3.  **WRITE**: Write the changes using `edit_file` with clear and precise `instructions`.
+4.  **VERIFY**: **Always** re-read the file immediately after editing to confirm the changes were applied correctly.
+
+---
+
+## 🔬 Surgical Edit Principles (For MODIFY & WRITE steps)
+Based on the community-driven [Gemini 2.5 Pro best practices](https://forum.cursor.com/t/gemini-2-5-pro-06-05-has-issues-with-edit-reapply/101373/10).
+
+### 🔥 Golden Rule: Surgical, Precise Replacement
+Treat every edit as a **"surgical, precise replacement,"** not a "fuzzy adjustment."
+
+### Principle 1: Replace, Don't Modify
+- **DO:** Replace entire lines or whole methods/logical blocks.
+- **DON'T:** Try to only change part of a line or just rename a method in place.
+```yaml
+// DO:
+// ... existing code ...
+public int CalculateTotalPrice() { /* new, improved logic */ }
+// ... existing code ...
+
+// DON'T:
+// ... existing code ...
+CalculateNewTotalPrice() // Risky to only change the method name
+// ... existing code ...
+```
+
+### Principle 2: Anchors Must Be Unique
+- **DO:** Include enough surrounding context to ensure uniqueness.
+- **DON'T:** Use generic or potentially repeated code as an anchor (e.g., just a closing bracket `}`).
+
+### Principle 3: Code Must Be Complete
+- **DO:** Submit syntactically correct, logically self-contained code blocks.
+- **DON'T:** Submit incomplete statements.
+
+### Principle 4: Decompose Complex Tasks
+- **DO:** Break down large refactors into multiple consecutive, simple, and safe small replacements.
+  1. **First `edit_file`:** Add a new helper method.
+  2. **Second `edit_file`:** Replace the old logic block with a call to the new method.
+- **DON'T:** Define a new method and change all its usages in a single `edit_file` operation.
+
+### Principle 5: Instructions Must Accurately Describe
+- **DO:** Write a one-sentence, precise summary of the `code_edit` in the `instructions` parameter.
+- **DON'T:** Use vague instructions like `"Fix bug"` or `"Update code"`.
+
+---
+
+## 🚨 High-Risk Files
+Always be cautious and prioritize **small, safe replacements** for critical configuration files. For major changes, confirm with the user.
+- `package.json`, `tsconfig.json`
+- `.yml`, `.yaml`
+- Các file Markdown có cấu trúc phức tạp.
+
+## 🔄 Error Recovery
+- If the **VERIFY** step fails, or the edit is not applied correctly, retry a maximum of 2 times.
+- If a patch fails, break it down into even smaller, safer changes.
+- Report any corruption or unexpected changes to the user immediately.

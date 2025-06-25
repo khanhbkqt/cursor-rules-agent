@@ -1,0 +1,89 @@
+---
+description: Nạp context thông minh và tối ưu, bao gồm các rule file, task, và tài liệu tri thức (knowledge_sources) cần thiết cho mode hiện tại.
+priority: 90
+alwaysApply: true
+---
+# 📦 Context Loader
+Intelligently load context including **deep knowledge**, **safety rules**, and **MCP tool access** based on mode requirements.
+
+## 🧰 MCP Tools Integration
+The context loader now provides access to enhanced MCP tools based on the current mode:
+- **Brainstorming Mode**: Web Search, Context7, Sequential Thinking, Interactive MCP
+- **Planning Mode**: Context7, Web Search, Sequential Thinking, Interactive MCP  
+- **Developing Mode**: Context7, Sequential Thinking, Interactive MCP, Web Search
+- **Documenting Mode**: Web Search, Interactive MCP
+
+## 🛠 Core API
+`context-loader.load(intent, CURRENT_MODE, mcp_tools_config)`
+
+### Process:
+1.  **Receive `CURRENT_MODE`** from the orchestrator.
+2.  **Locate & Load Task Context (if applicable)**:
+    -   If the user intent specifies a `TASK_XXX`, the loader must first find it.
+    -   **Search Process**:
+        1. Read root `docs/tasks/task-index.json`.
+        2. For each feature, read its `task-index.feature.json`.
+        3. Search for `TASK_XXX` in the `tasks` array.
+        4. Once found, store the feature's path (`docs/features/FEATURE_NAME/`). This is crucial for resolving relative paths in `knowledge_sources`.
+        5. If not found, notify user and HALT.
+    -   Load the `TASK_XXX.md` file.
+3.  **Load the specific mode rule file** (e.g., `modes/developing-mode.mdc`).
+4.  **Load `task-index.json`** (HIGH priority).
+5.  **Perform Context Loading based on Mode**:
+
+    #### If `CURRENT_MODE` is `Developing`:
+    a. **Verify `knowledge_sources` integrity**:
+       - If any referenced file DOES NOT EXIST →
+         1) Switch `CURRENT_MODE` to **Planning**.
+         2) Notify the user: "⚠️ Missing specs for TASK_XXX → Returned to Planning Mode. Please create/refine the required documents.".
+         3) EXIT loader.
+       - If all exist, load spec files as **HIGHEST PRIORITY** context.
+    b. **Load Triggered Utilities**:
+       - Always load `utilities/safe-code-generation.mdc`
+       - ALSO load `utilities/enforcer.mdc` to apply runtime safeguards
+    c. **Enable MCP Tools**:
+       - Provide **Context7 MCP** access for API documentation
+       - Enable **Sequential Thinking** for complex algorithms
+       - Enable **Interactive MCP** for quick clarifications
+       - Enable **Web Search** for implementation solutions
+    d. **Load related files**: Source code, tests, etc.
+
+    #### If `CURRENT_MODE` is `Planning`:
+    a. Load `modes/planning-agent.mdc`
+    b. Load feature requirements and `specs/` directories
+    c. **Enable MCP Tools**:
+       - Provide **Context7 MCP** for technology validation
+       - Enable **Web Search** for architectural best practices
+       - Enable **Sequential Thinking** for systematic task decomposition
+       - Enable **Interactive MCP** for stakeholder confirmation
+
+    #### If `CURRENT_MODE` is `Documenting`:
+    a. Load `modes/documenting-mode.mdc`
+    b. For completed features, load `knowledge_sources` to enrich docs
+    c. **Enable MCP Tools**:
+       - Enable **Web Search** for documentation best practices
+       - Enable **Interactive MCP** for content validation
+
+    #### If `CURRENT_MODE` is `Brainstorming`:
+    a. Load `modes/brainstorming-mode.mdc`
+    b. Do **NOT** load `safe-code-generation` (no code yet)
+    c. Load preliminary `requirements/` docs provided by user for pending feature
+    d. Prepare empty blueprint template from `templates/blueprint-template.yaml` **in-memory**
+    e. Expose helper `context.create_idea()` API to append to `docs/idea-backlog.md`
+    f. **Enable Enhanced MCP Tools**:
+       - Enable **Web Search** for market research and trends
+       - Provide **Context7 MCP** for technology exploration
+       - Enable **Sequential Thinking** for structured ideation
+       - Enable **Interactive MCP** for real-time stakeholder validation
+
+## 🚫 Loading Restrictions
+- Entire `docs/tasks/active/` folder
+- Unrelated task `.md` files
+- `safe-code-generation.mdc` in non-coding modes (Planning, Brainstorming, Documenting)
+
+## 📊 MCP Tool Usage Guidelines
+- **Brainstorming**: Full MCP toolkit for comprehensive research and ideation
+- **Planning**: Focused on validation and systematic analysis tools
+- **Developing**: Emphasis on technical documentation and problem-solving tools
+- **Documenting**: Limited to research and validation tools
+- **All Modes**: Interactive MCP should be used judiciously to avoid interrupting workflow

@@ -1,0 +1,119 @@
+# {{SERVICE_NAME}} Blueprint
+# Generated: {{GENERATED_DATE}}
+# Version: {{VERSION}}
+
+metadata:
+  name: "{{SERVICE_NAME}}"
+  version: "{{VERSION}}"
+  description: "{{SERVICE_DESCRIPTION}}"
+  owner: "{{OWNER}}"
+  created: "{{CREATED_DATE}}"
+  updated: "{{UPDATED_DATE}}"
+  status: "{{STATUS}}"  # draft|review|approved|deprecated
+
+architecture:
+  type: "{{ARCHITECTURE_TYPE}}"  # service|module|component
+  layer: "{{LAYER}}"  # presentation|business|data|infrastructure
+  dependencies:
+    - name: "{{DEPENDENCY_NAME}}"
+      type: "{{DEPENDENCY_TYPE}}"  # service|database|external
+      version: "{{DEPENDENCY_VERSION}}"
+  interfaces:
+    - name: "{{INTERFACE_NAME}}"
+      type: "{{INTERFACE_TYPE}}"  # REST|GraphQL|gRPC|Event
+      port: {{PORT}}
+      path: "{{BASE_PATH}}"
+
+api_specification:
+  base_url: "{{BASE_URL}}"
+  version: "{{API_VERSION}}"
+  authentication:
+    type: "{{AUTH_TYPE}}"  # bearer|basic|oauth2|apikey
+    required: {{AUTH_REQUIRED}}
+  endpoints:
+    - path: "{{ENDPOINT_PATH}}"
+      method: "{{HTTP_METHOD}}"
+      description: "{{ENDPOINT_DESCRIPTION}}"
+      parameters:
+        - name: "{{PARAM_NAME}}"
+          type: "{{PARAM_TYPE}}"
+          required: {{PARAM_REQUIRED}}
+          description: "{{PARAM_DESCRIPTION}}"
+      responses:
+        - status: {{RESPONSE_STATUS}}
+          description: "{{RESPONSE_DESCRIPTION}}"
+          schema: "{{RESPONSE_SCHEMA}}"
+
+data_models:
+  entities:
+    - name: "{{ENTITY_NAME}}"
+      description: "{{ENTITY_DESCRIPTION}}"
+      fields:
+        - name: "{{FIELD_NAME}}"
+          type: "{{FIELD_TYPE}}"
+          required: {{FIELD_REQUIRED}}
+          description: "{{FIELD_DESCRIPTION}}"
+  relationships:
+    - from: "{{FROM_ENTITY}}"
+      to: "{{TO_ENTITY}}"
+      type: "{{RELATIONSHIP_TYPE}}"  # one-to-one|one-to-many|many-to-many
+
+implementation:
+  technology_stack:
+    - name: "{{TECH_NAME}}"
+      version: "{{TECH_VERSION}}"
+      purpose: "{{TECH_PURPOSE}}"
+  file_structure:
+    - path: "{{FILE_PATH}}"
+      type: "{{FILE_TYPE}}"  # controller|service|repository|model
+      description: "{{FILE_DESCRIPTION}}"
+  
+testing:
+  strategies:
+    - type: "{{TEST_TYPE}}"  # unit|integration|e2e
+      coverage_target: {{COVERAGE_TARGET}}
+      frameworks:
+        - "{{TEST_FRAMEWORK}}"
+  test_data:
+    - name: "{{TEST_DATA_NAME}}"
+      type: "{{TEST_DATA_TYPE}}"
+      source: "{{TEST_DATA_SOURCE}}"
+
+deployment:
+  environment_variables:
+    - name: "{{ENV_VAR_NAME}}"
+      required: {{ENV_VAR_REQUIRED}}
+      description: "{{ENV_VAR_DESCRIPTION}}"
+      default: "{{ENV_VAR_DEFAULT}}"
+  ports:
+    - port: {{PORT_NUMBER}}
+      description: "{{PORT_DESCRIPTION}}"
+  health_checks:
+    - path: "{{HEALTH_CHECK_PATH}}"
+      method: "{{HEALTH_CHECK_METHOD}}"
+      expected_status: {{EXPECTED_STATUS}}
+
+gate_criteria:
+  gate_1_planning:
+    - "Requirements clearly defined"
+    - "Architecture approved"
+    - "Dependencies identified"
+    - "API specification complete"
+  gate_2_development:
+    - "Core functionality implemented"
+    - "Unit tests >80% coverage"
+    - "Integration tests passing"
+    - "Documentation updated"
+  gate_3_deployment:
+    - "End-to-end tests passing"
+    - "Performance benchmarks met"
+    - "Security review completed"
+    - "Deployment scripts tested"
+
+notes: |
+  {{ADDITIONAL_NOTES}}
+
+# Links
+documentation: "{{DOCUMENTATION_URL}}"
+repository: "{{REPOSITORY_URL}}"
+issue_tracker: "{{ISSUE_TRACKER_URL}}"
