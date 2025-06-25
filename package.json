@@ -1,0 +1,44 @@
+{
+  "name": "cursor-rules-agent-installer",
+  "version": "0.1.0",
+  "description": "NPX installer for Cursor Rules Agent - AI-Driven Development Workflow System",
+  "main": "bin/install.js",
+  "bin": {
+    "cursor-rules-agent-installer": "bin/install.js"
+  },
+  "scripts": {
+    "test": "node scripts/simple-test.js",
+    "publish": "node scripts/publish.js",
+    "prepack": "echo \"Preparing package for publication...\"",
+    "postpack": "echo \"Package ready for publication\""
+  },
+  "keywords": [
+    "cursor",
+    "ai",
+    "rules",
+    "agent",
+    "workflow",
+    "development",
+    "automation",
+    "npx"
+  ],
+  "author": "Cursor Rules Agent Team",
+  "license": "MIT",
+  "dependencies": {
+    "fs-extra": "^11.2.0",
+    "chalk": "^4.1.2",
+    "inquirer": "^8.2.6",
+    "ora": "^5.4.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thevibecoding/cursor-rules-agent.git"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  },
+  "preferGlobal": false,
+  "publishConfig": {
+    "access": "public"
+  }
+} 
