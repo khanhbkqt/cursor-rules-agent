@@ -1,4 +1,4 @@
-# 🤖 Cursor Rules Agent v0.2.0
+# 🤖 Cursor Rules Agent v0.2.2
 **AI-Driven Development Workflow with Knowledge-Aware & Deterministic Architecture**
 
 ## 📑 Table of Contents
