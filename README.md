@@ -2,6 +2,7 @@
 **AI-Driven Development Workflow with Knowledge-Aware & Deterministic Architecture**
 
 ## 📑 Table of Contents
+- [Quick Start](#quick-start)
 - [What's New in v0.2](#whats-new-in-v02)
 - [Introduction](#introduction)
 - [System Architecture](#system-architecture)
@@ -44,6 +45,16 @@
 - **Complete Bug Workflow Guide**: Detailed documentation for bug detection and resolution
 - **Emergency Protocols**: Clear procedures for handling critical issues
 - **Enhanced Examples**: More comprehensive examples and use cases
+
+## ⚡ Quick Start
+
+Get started in 30 seconds with NPX:
+
+```bash
+npx cursor-rules-agent-installer
+```
+
+Then open Cursor and say: `"initialize project structure"`
 
 ## 🎯 Introduction
 
@@ -121,31 +132,53 @@ cursor-rules-agent/
 
 ## 🚀 Installation Guide
 
-### ⚡ Super Quick Setup (1 minute) - Recommended
+### ⚡ One-Command Installation (Recommended)
 
-**Using NPX (No installation needed):**
+Install and set up Cursor Rules Agent in any project with a single command:
+
 ```bash
-cd your-project
 npx cursor-rules-agent-installer
 ```
 
-That's it! The installer will:
+**That's it!** No global installation needed. The installer will:
 - ✅ **Download latest rules from GitHub** (always up-to-date content)
 - ✅ Create `.cursor/rules/` with all workflow rules
 - ✅ **Reliable installation** with retry mechanism and error handling  
 - ✅ Provide User Rules template for Cursor Settings
 - ✅ Guide you through first steps
 
+### 🎯 Why NPX?
+- **No global installs**: Use latest version every time
+- **Always up-to-date**: Rules downloaded directly from GitHub
+- **Zero dependencies**: No need to manage package versions
+- **Works anywhere**: Any project, any directory
+
+> **📦 Package Name**: `cursor-rules-agent-installer` on NPM
+
 **Note**: The installer focuses only on Cursor Rules installation. For project structure setup, use the command `"initialize project structure"` after installation.
 
-### ⚡ Git Installation (Alternative)
+### 📦 Alternative Installation Methods
 
-**Install directly from GitHub:**
+<details>
+<summary>🔧 Advanced Installation Options</summary>
+
+**For development or custom setups:**
+
+1. **Git Installation:**
 ```bash
-cd your-project
 npm install https://github.com/khanhbkqt/cursor-rules-agent.git
 npx cursor-rules-agent-installer
 ```
+
+2. **Global Installation (not recommended):**
+```bash
+npm install -g cursor-rules-agent-installer
+cursor-rules-agent-installer
+```
+
+**Recommendation**: Use NPX for the best experience - it's simpler and always uses the latest version.
+
+</details>
 
 ### 🛠️ Manual Setup (Advanced)
 
@@ -181,26 +214,27 @@ npx cursor-rules-agent-installer
    ```
 </details>
 
-### 🎯 After Installation
+### 🎯 After NPX Installation
 
-1. **Open Cursor in your project**
-2. **Initialize project structure first** (required):
+1. **Open Cursor in your project directory**
+2. **Initialize project structure** (required first step):
 ```
 "initialize project structure"
 ```
 
-3. **Start using the workflow**:
+3. **Start using the enhanced AI workflow**:
 ```
 "What mode should I be in?"
 ```
 
-**📖 For step-by-step guidance, see [QUICKSTART.md](QUICKSTART.md)**
+**📖 For complete step-by-step guidance, see [QUICKSTART.md](QUICKSTART.md)**
 
-Then try commands like:
+Try these enhanced commands:
 ```
-"brainstorm ideas for user authentication"
-"plan feature: Shopping Cart"
-"work on TASK_001"
+"brainstorm ideas for user authentication system"
+"plan feature: Shopping Cart with payment integration"
+"work on TASK_001: Implement JWT authentication"
+"update documentation for completed features"
 ```
 
 ### 🤖 Smart Features
