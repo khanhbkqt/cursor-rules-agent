@@ -12,6 +12,7 @@
 - [Bug Fixing Workflow](#bug-fixing-workflow)
 - [Cursor Agent & Rules](#cursor-agent--rules)
 - [Enhanced MCP Tools](#enhanced-mcp-tools)
+- [MCP Server Installation Guide](#️-mcp-server-installation-guide)
 - [Extensions & Customization](#extensions--customization)
 - [Documentation References](#documentation-references)
 - [Contributing](#contributing)
@@ -503,6 +504,181 @@ The agent will:
 - Set up Context7 for your preferred libraries
 - Customize Interactive MCP prompts for your workflow
 - Tune Sequential Thinking depth for project complexity
+
+### 🛠️ MCP Server Installation Guide
+
+To fully leverage Cursor Rules Agent's enhanced capabilities, install these recommended MCP servers:
+
+#### 1. **Sequential Thinking MCP Server** 🧠
+
+**Purpose**: Enables structured, step-by-step reasoning for complex problem-solving.
+
+**Installation:**
+```bash
+# Install globally via npm
+npm install -g @modelcontextprotocol/server-sequential-thinking
+```
+
+**Cursor Configuration:**
+Add to your Cursor `mcp.json` or Claude Desktop config:
+```json
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "npx",
+      "args": ["-y", "@modelcontextprotocol/server-sequential-thinking"]
+    }
+  }
+}
+```
+
+**Alternative using Python (UV):**
+```bash
+# Install via UV
+uv tool install mcp-sequential-thinking
+
+# Configuration for UV installation
+{
+  "mcpServers": {
+    "sequential-thinking": {
+      "command": "uv",
+      "args": ["run", "mcp-sequential-thinking"]
+    }
+  }
+}
+```
+
+#### 2. **Context7 MCP Server** 📚
+
+**Purpose**: Provides up-to-date library documentation and API references.
+
+**Installation:**
+```bash
+# Quick install via Smithery (recommended for Claude)
+npx -y @smithery/cli install @upstash/context7-mcp --client claude
+
+# Or install manually via NPX
+npm install -g @upstash/context7-mcp
+```
+
+**Cursor Configuration:**
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "npx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+**Alternative Runtime Options:**
+```json
+// Using Bun (faster, more reliable)
+{
+  "mcpServers": {
+    "context7": {
+      "command": "bunx",
+      "args": ["-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+
+// Using Deno
+{
+  "mcpServers": {
+    "context7": {
+      "command": "deno",
+      "args": ["run", "--allow-net", "npm:@upstash/context7-mcp"]
+    }
+  }
+}
+```
+
+**Usage:** Add `use context7` to your prompts for real-time documentation.
+
+#### 3. **Interactive MCP Server** 💬
+
+**Purpose**: Enables real-time user interaction without breaking AI thought flow.
+
+**Installation:**
+```bash
+# Install via NPM
+npm install -g interactive-mcp
+```
+
+**Cursor Configuration:**
+```json
+{
+  "mcpServers": {
+    "interactive": {
+      "command": "npx",
+      "args": ["-y", "interactive-mcp"]
+    }
+  }
+}
+```
+
+**Custom Timeout Configuration:**
+```json
+{
+  "mcpServers": {
+    "interactive": {
+      "command": "npx",
+      "args": ["-y", "interactive-mcp", "-t", "30"]
+    }
+  }
+}
+```
+
+#### 📍 **Configuration File Locations**
+
+**Cursor:**
+- Windows: `%USERPROFILE%\.cursor\mcp.json`
+- macOS: `~/.cursor/mcp.json`
+- Linux: `~/.cursor/mcp.json`
+
+**Claude Desktop:**
+- Windows: `%APPDATA%\Claude\claude_desktop_config.json`
+- macOS: `~/Library/Application Support/Claude/claude_desktop_config.json`
+
+#### 🔧 **Troubleshooting MCP Installation**
+
+**Common Issues:**
+
+1. **`ERR_MODULE_NOT_FOUND`**: Try using `bunx` instead of `npx`
+2. **Path Issues**: Use full path to executables if command not found
+3. **Permission Errors**: Run terminal as administrator (Windows) or use `sudo` (Linux/macOS)
+4. **Multiple Instances**: Ensure only one instance of each server runs at a time
+
+**Testing MCP Installation:**
+```bash
+# Test with MCP Inspector
+npx -y @modelcontextprotocol/inspector npx @upstash/context7-mcp@latest
+```
+
+**Windows-Specific Configuration:**
+```json
+{
+  "mcpServers": {
+    "context7": {
+      "command": "cmd",
+      "args": ["/c", "npx", "-y", "@upstash/context7-mcp@latest"]
+    }
+  }
+}
+```
+
+#### ✅ **Verification**
+
+After installation, restart Cursor and verify MCP tools are working:
+
+1. Sequential Thinking: Ask for "structured analysis of..."
+2. Context7: Use prompts with `use context7`
+3. Interactive MCP: Ask for user confirmation in prompts
+
+**All MCP servers should now enhance your Cursor Rules Agent workflow with real-time documentation, structured thinking, and interactive capabilities!**
 
 ## 📚 Documentation References
 
