@@ -4,7 +4,7 @@ globs:
 alwaysApply: false
 ---
 # 💡 Brainstorming Mode
-Initialize and analyze new feature ideas before transitioning to Planning, leveraging advanced MCP tools for comprehensive ideation.
+Initialize and analyze new feature ideas before transitioning to Planning, leveraging advanced MCP tools for comprehensive ideation **with proactive documentation creation**.
 
 ## 🎯 Activation
 - Automatically by `master-orchestrator` when detecting feature requests without Blueprint/Tasks
@@ -23,18 +23,39 @@ Initialize and analyze new feature ideas before transitioning to Planning, lever
 2. Research market trends and best practices via **Web Search**
 3. Explore available technologies and libraries through **Context7**
 4. Use **Sequential Thinking** for systematic analysis (MoSCoW/Kano/Value vs Effort)
-5. Generate **Idea Backlog** (`docs/ideas/idea-backlog.md`)
-6. For selected ideas → generate Blueprint framework (`templates/blueprint-template.yaml`)
-7. Preliminary estimation (story points + complexity) & Risk/Benefit analysis
-8. Conclude: transition to **Planning Mode** for detailed blueprint and task creation
+5. **🆕 CREATE COMPREHENSIVE DOCUMENTATION** during research phase
+6. Generate **Idea Backlog** (`docs/ideas/idea-backlog.md`)
+7. For selected ideas → generate Blueprint framework (`templates/blueprint-template.yaml`)
+8. Preliminary estimation (story points + complexity) & Risk/Benefit analysis
+9. Conclude: transition to **Planning Mode** for detailed blueprint and task creation
 
-## 🛠 Enhanced Workflow with MCP Tools
+## 📚 Documentation Creation Strategy
+**Core Principle**: Transform every research insight into structured documentation to accelerate Planning phase.
 
-### Phase 1: Research & Discovery
+### Mandatory Documentation Files:
+1. **`docs/ideas/research-notes.md`** - Detailed research findings
+2. **`docs/ideas/technology-analysis.md`** - Technology stack evaluation  
+3. **`docs/ideas/market-research.md`** - Market trends and competitor analysis
+4. **`docs/ideas/stakeholder-feedback.md`** - User input and validation results
+5. **`docs/ideas/risk-assessment.md`** - Risk analysis and mitigation strategies
+6. **`docs/ideas/feature-requirements.md`** - Structured requirements documentation
+
+### Documentation Creation Guidelines:
+- **Create files progressively** as you gather information
+- **Use structured templates** with clear sections and headers
+- **Include timestamps** and source citations for all research
+- **Cross-reference** between documentation files
+- **Update existing files** rather than creating duplicates
+- **Maintain consistency** in formatting and structure
+
+## 🛠 Enhanced Workflow with MCP Tools & Documentation
+
+### Phase 1: Research & Discovery + Documentation
 1. **Initial Requirements Gathering** (Interactive MCP)
    - Ask guided questions (Who, What, Why, Success Criteria)
    - Use Interactive MCP for real-time clarification without breaking flow
-   - Record in `## Raw Notes` section of Idea Backlog
+   - **📝 CREATE**: `docs/ideas/feature-requirements.md` with structured user input
+   - **📝 CREATE**: `docs/ideas/stakeholder-feedback.md` for validation notes
 
 2. **Market Research** (Web Search + Sequential Thinking)
    - Use Sequential Thinking to structure research approach
@@ -43,43 +64,130 @@ Initialize and analyze new feature ideas before transitioning to Planning, lever
      - Competitor analysis and feature gaps
      - Industry best practices and standards
      - Recent technological developments
+   - **📝 CREATE**: `docs/ideas/market-research.md` with detailed findings
+   - **📝 UPDATE**: Include trend analysis and competitor insights
 
 3. **Technology Exploration** (Context7 MCP)
    - Research relevant libraries and frameworks
    - Explore API capabilities and limitations
    - Identify technology dependencies and requirements
+   - **📝 CREATE**: `docs/ideas/technology-analysis.md` with:
+     - Library comparison tables
+     - Framework pros/cons
+     - Integration considerations
+     - Performance implications
 
-### Phase 2: Analysis & Prioritization
+### Phase 2: Analysis & Prioritization + Structured Documentation
 4. **Systematic Analysis** (Sequential Thinking)
    - Use Sequential Thinking for comprehensive evaluation:
      - MoSCoW prioritization (Must, Should, Could, Won't)
      - Kano model analysis (Basic, Performance, Excitement features)
      - Value vs Effort matrix
      - Risk assessment with mitigation strategies
+   - **📝 CREATE**: `docs/ideas/analysis-framework.md` with evaluation matrices
+   - **📝 CREATE**: `docs/ideas/risk-assessment.md` with detailed risk analysis
 
 5. **Stakeholder Validation** (Interactive MCP)
    - Present findings and get real-time feedback
    - Validate assumptions and priorities
    - Refine ideas based on stakeholder input
+   - **📝 UPDATE**: `docs/ideas/stakeholder-feedback.md` with validation results
+   - **📝 UPDATE**: `docs/ideas/feature-requirements.md` with refined requirements
 
-### Phase 3: Documentation & Transition
-6. **Generate Blueprint Draft**
+### Phase 3: Documentation Consolidation & Transition
+6. **Create Research Summary**
+   - **📝 CREATE**: `docs/ideas/research-summary.md` consolidating all findings
+   - Include executive summary of all research activities
+   - Provide clear recommendations for Planning phase
+
+7. **Generate Blueprint Draft**
    - For `must` or `should` ideas, create `<Feature>.blueprint.yaml` (Gate 0)
    - Set `gate_status: 0` with TODO items in all sections
+   - **Reference documentation files** in blueprint for detailed context
    - Include research findings and technology choices
 
-7. **Comprehensive Analysis Table**
-   | Idea | Effort (SP) | Value | Complexity | Risk | Tech Stack | Market Trend |
-   |------|-------------|-------|------------|------|------------|--------------|
+8. **Comprehensive Analysis Table**
+   | Idea | Effort (SP) | Value | Complexity | Risk | Tech Stack | Market Trend | Documentation |
+   |------|-------------|-------|------------|------|------------|--------------|---------------|
 
-8. **Output Summary**
+9. **Output Summary**
    - Present prioritized idea table with research insights
    - Highlight top-N recommendations for Planning transition
+   - **Provide documentation index** for Planning agent reference
    - Include implementation roadmap and next steps
+
+## 📚 Documentation Templates
+
+### `docs/ideas/research-notes.md` Template:
+```md
+# 🔬 Research Notes - [Feature Name]
+**Created**: [Date]
+**Last Updated**: [Date]
+
+## Overview
+Brief description of the research scope and objectives.
+
+## Key Findings
+### Market Insights
+- Finding 1 (Source: [URL/Tool])
+- Finding 2 (Source: [URL/Tool])
+
+### Technical Discoveries
+- Technology option 1: [Details]
+- Technology option 2: [Details]
+
+### User Needs Analysis
+- Need 1: [Description]
+- Need 2: [Description]
+
+## Next Steps
+- [ ] Action item 1
+- [ ] Action item 2
+
+## References
+- [Web Search] URL 1
+- [Context7] Library documentation
+- [Interactive MCP] User feedback session
+```
+
+### `docs/ideas/technology-analysis.md` Template:
+```md
+# 🛠 Technology Analysis - [Feature Name]
+**Created**: [Date]
+**Analyzed By**: Context7 MCP + Web Search
+
+## Technology Stack Comparison
+
+| Technology | Pros | Cons | Complexity | Community | Learning Curve |
+|------------|------|------|------------|-----------|----------------|
+| Option 1   | ...  | ...  | Low        | Large     | Easy           |
+| Option 2   | ...  | ...  | Medium     | Medium    | Medium         |
+
+## Recommended Stack
+**Primary Choice**: [Technology]
+**Rationale**: [Detailed explanation]
+
+## Integration Considerations
+- Dependency requirements
+- Performance implications
+- Scalability factors
+
+## Implementation Notes for Planning
+Key technical considerations to address in Planning phase.
+```
 
 ## 📑 Enhanced Idea Backlog Template
 ```md
 # 📒 Idea Backlog
+
+## Research Documentation Index
+- 📋 [Feature Requirements](./feature-requirements.md)
+- 🔬 [Research Notes](./research-notes.md)
+- 🛠 [Technology Analysis](./technology-analysis.md)
+- 📊 [Market Research](./market-research.md)
+- 👥 [Stakeholder Feedback](./stakeholder-feedback.md)
+- ⚠️ [Risk Assessment](./risk-assessment.md)
+- 📝 [Research Summary](./research-summary.md)
 
 ## Raw Notes
 - [Date] User requirement: ...
@@ -104,10 +212,10 @@ Initialize and analyze new feature ideas before transitioning to Planning, lever
 - **Won't have**: Out of scope for now
 
 ### Comprehensive Evaluation
-| Idea | Effort (SP) | Value | Complexity | Risk | Tech Stack | Market Validation |
-|------|-------------|-------|------------|------|------------|-------------------|
-| Feature A | 8 | High | Medium | Low | React, Node.js | Strong demand |
-| Feature B | 5 | Medium | Low | Medium | Python, FastAPI | Emerging trend |
+| Idea | Effort (SP) | Value | Complexity | Risk | Tech Stack | Market Validation | Documentation |
+|------|-------------|-------|------------|------|------------|-------------------|---------------|
+| Feature A | 8 | High | Medium | Low | React, Node.js | Strong demand | ✅ Complete |
+| Feature B | 5 | Medium | Low | Medium | Python, FastAPI | Emerging trend | 🔄 In Progress |
 
 ## Stakeholder Validation
 - [Interactive MCP] Feedback on priorities: ...
@@ -116,26 +224,47 @@ Initialize and analyze new feature ideas before transitioning to Planning, lever
 
 ## Approved Ideas for Planning
 - [Feature Name]: Ready for blueprint creation
+  - Documentation: All research files created ✅
+  - Technology: Stack analyzed and recommended ✅
+  - Requirements: Validated with stakeholders ✅
 ```
 
 ## 🌿 Git Workflow
 Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
 - Branch naming: `ideas/<idea-id>-<slug>` for brainstorming activities
 - Commit messages: `idea(<scope>): <description>` format
-- Auto-commit when idea backlog is updated or blueprint drafts are created
-- Commit after completing research or stakeholder validation
+- **Auto-commit documentation files** as they are created or updated
+- Commit after completing research phases or stakeholder validation
+- **Separate commits for each documentation file** to maintain clear history
 
 ## 🔄 Transition Strategy
 - When user selects **Approve Ideas** → Orchestrator sets `brainstorm_requested = false`, switch to `CURRENT_MODE = Planning`
+- **Transfer all documentation files** to Planning agent context
 - Include MCP research findings in blueprint creation
 - Transfer technology choices and risk analysis to planning phase
+- **Provide documentation index** for efficient Planning phase navigation
 
 ## 🚨 Enhanced Guardrails
 - No code generation during brainstorming
 - No writes to `src/` directory
+- **MANDATORY**: Create documentation files in `docs/ideas/` for all research activities
 - Only create/modify files in `docs/` (especially `docs/ideas/`) or `docs/blueprints/`
+- **Documentation Quality Standards**:
+  - All files must have timestamps and source citations
+  - Use structured templates consistently
+  - Cross-reference related documentation
+  - Maintain clear and actionable content
 - **MCP Tool Usage Rules**:
   - Use Web Search responsibly (avoid excessive API calls)
   - Context7 queries should be focused and relevant
   - Interactive MCP should not interrupt user flow unnecessarily
   - Sequential Thinking should be proportional to problem complexity
+  - **Document all MCP tool outputs** in appropriate research files
+
+## 📊 Success Metrics for Brainstorming Mode
+- ✅ Complete documentation suite created for each feature idea
+- ✅ Technology stack thoroughly analyzed and documented
+- ✅ Market research findings properly structured
+- ✅ Stakeholder feedback captured and validated
+- ✅ Risk assessment completed with mitigation strategies
+- ✅ Clear transition package prepared for Planning mode

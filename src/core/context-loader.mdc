@@ -78,12 +78,18 @@ The context loader now provides access to enhanced MCP tools based on the curren
     b. Do **NOT** load `safe-code-generation` (no code yet)
     c. Load preliminary `requirements/` docs provided by user for pending feature
     d. Prepare empty blueprint template from `templates/blueprint-template.yaml` **in-memory**
-    e. Expose helper `context.create_idea()` API to append to `docs/idea-backlog.md`
-    f. **Enable Enhanced MCP Tools**:
+    e. **Prepare documentation templates** from `templates/research-notes-template.md` and `templates/technology-analysis-template.md`
+    f. **Create `docs/ideas/` directory** if it doesn't exist for documentation storage
+    g. Expose helper `context.create_idea()` API to append to `docs/idea-backlog.md`
+    h. **Enable Enhanced MCP Tools**:
        - Enable **Web Search** for market research and trends
        - Provide **Context7 MCP** for technology exploration
        - Enable **Sequential Thinking** for structured ideation
        - Enable **Interactive MCP** for real-time stakeholder validation
+    i. **Documentation Creation Requirements**:
+       - Agent MUST create structured documentation files during research
+       - All MCP tool outputs MUST be documented in appropriate templates
+       - Cross-reference documentation files for Planning phase preparation
 
 ## 🚫 Loading Restrictions
 - Entire `docs/tasks/active/` folder
@@ -91,8 +97,16 @@ The context loader now provides access to enhanced MCP tools based on the curren
 - `safe-code-generation.mdc` in non-coding modes (Planning, Brainstorming, Documenting)
 
 ## 📊 MCP Tool Usage Guidelines
-- **Brainstorming**: Full MCP toolkit for comprehensive research and ideation
+- **Brainstorming**: Full MCP toolkit for comprehensive research and ideation + **MANDATORY documentation creation**
 - **Planning**: Focused on validation and systematic analysis tools
 - **Developing**: Emphasis on technical documentation and problem-solving tools
 - **Documenting**: Limited to research and validation tools
 - **All Modes**: Interactive MCP should be used judiciously to avoid interrupting workflow
+
+### Enhanced Brainstorming Documentation Requirements:
+- **Web Search**: All findings MUST be documented in `docs/ideas/market-research.md`
+- **Context7 MCP**: Technology analysis MUST be captured in `docs/ideas/technology-analysis.md`
+- **Sequential Thinking**: Analysis frameworks MUST be saved in `docs/ideas/analysis-framework.md`
+- **Interactive MCP**: Stakeholder feedback MUST be recorded in `docs/ideas/stakeholder-feedback.md`
+- **Cross-Referencing**: All documentation files MUST reference each other for context
+- **Planning Handoff**: Complete documentation package MUST be ready for Planning mode transition

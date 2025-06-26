@@ -23,7 +23,7 @@ This mode is activated **exclusively** by the `master-orchestrator`'s detection 
 ## ⭐ Task Granularity Principle
 Each task must be a "Significant Unit of Work" (3-8 story points, testable outcome).
 
-### ✅ Định nghĩa một "Good Task":
+### ✅ Definition of a "Good Task":
 - **Testable Outcome**: Create a testable outcome (API endpoint, UI component).
 - **Core File Focus**: Corresponds to creating/modifying a core file (service, controller).
 - **Reasonable Estimate (3-8 points)**: Task too small to combine, too large to split.
