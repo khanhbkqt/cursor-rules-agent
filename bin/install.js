@@ -10,7 +10,7 @@ const axios = require('axios');
 // Package info
 const packageInfo = {
   name: 'Cursor Rules Agent',
-  version: '0.2.0',
+  version: '0.2.1',
   github: 'https://github.com/khanhbkqt/cursor-rules-agent'
 };
 

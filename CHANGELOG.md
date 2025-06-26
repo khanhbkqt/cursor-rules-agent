@@ -5,6 +5,44 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [0.2.1] - 2025-01-15
+
+### ⚡ Enhanced Installer
+- **GitHub Integration**: Files now downloaded directly from GitHub repository instead of embedded content
+  - Always up-to-date content ensuring users get latest rules and templates
+  - No more issues with incomplete or stale embedded content
+  - Direct access to all utilities, modes, and templates from source
+
+- **Reliable Downloads**: Implemented robust download mechanism
+  - Retry logic with exponential backoff for network failures
+  - Comprehensive error handling and user feedback
+  - Progress indicators during download process
+  - Timeout protection and recovery
+
+- **Complete Content Delivery**: All templates and utilities included
+  - Full `bug-fixing-mode.mdc` with comprehensive bug workflow
+  - All template files including `task-index-feature-template.json`
+  - Complete utility files like `commit-rules.mdc`
+  - Enhanced templates with latest improvements
+
+### 🔧 Technical Improvements
+- Added `axios` dependency for HTTP requests
+- Implemented `downloadWithRetry()` method with configurable retry attempts
+- Updated file mapping to use GitHub raw URLs
+- Added comprehensive test script (`test-installer.js`) for verification
+- Enhanced error messages and user experience
+
+### 🧪 Testing
+- Added `npm run test:installer` script for automated testing
+- Comprehensive verification of downloaded content
+- File content validation to ensure proper downloads
+- Automated cleanup and test isolation
+
+### 📚 Documentation
+- Updated README with enhanced installer benefits
+- Highlighted GitHub integration advantages in installation section
+- Added reliable installation notes and troubleshooting
+
 ## [0.2.0] - 2025-06-26
 
 ### 🚀 Added
