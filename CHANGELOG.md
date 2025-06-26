@@ -38,10 +38,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - File content validation to ensure proper downloads
 - Automated cleanup and test isolation
 
+### 🎯 **Simplified Focus**
+- **Rules-Only Installation**: Installer now focuses only on Cursor Rules installation
+  - Removed automatic project structure creation (docs/, blueprints/, etc.)
+  - No longer creates task-index.json or README files automatically
+  - Cleaner, less invasive installation process
+  - Users can optionally use "initialize project structure" command after installation
+
 ### 📚 Documentation
-- Updated README with enhanced installer benefits
+- Updated README with enhanced installer benefits and simplified focus
 - Highlighted GitHub integration advantages in installation section
 - Added reliable installation notes and troubleshooting
+- Clarified installer scope and optional project setup
 
 ## [0.2.0] - 2025-06-26
 

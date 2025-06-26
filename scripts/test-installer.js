@@ -42,10 +42,7 @@ async function testInstaller() {
       { path: '.cursor/rules/core', name: 'Core rules' },
       { path: '.cursor/rules/modes', name: 'Mode rules' },
       { path: '.cursor/rules/utilities', name: 'Utilities' },
-      { path: '.cursor/rules/templates', name: 'Templates' },
-      { path: 'docs', name: 'Docs directory' },
-      { path: 'blueprints', name: 'Blueprints directory' },
-      { path: 'task-index.json', name: 'Task index file' }
+      { path: '.cursor/rules/templates', name: 'Templates' }
     ];
     
     console.log(chalk.white('\n📋 Verification Results:'));

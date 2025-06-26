@@ -132,11 +132,11 @@ npx cursor-rules-agent-installer
 That's it! The installer will:
 - ✅ **Download latest rules from GitHub** (always up-to-date content)
 - ✅ Create `.cursor/rules/` with all workflow rules
-- ✅ Set up organized project structure (`docs/specs/`, `docs/features/`, `blueprints/`)
-- ✅ Initialize `task-index.json` for task management
+- ✅ **Reliable installation** with retry mechanism and error handling  
 - ✅ Provide User Rules template for Cursor Settings
-- ✅ **Reliable installation** with retry mechanism and error handling
 - ✅ Guide you through first steps
+
+**Note**: The installer focuses only on Cursor Rules installation. For project structure setup, use the command `"initialize project structure"` after installation.
 
 ### ⚡ Git Installation (Alternative)
 

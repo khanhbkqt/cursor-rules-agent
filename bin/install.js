@@ -61,9 +61,8 @@ class CursorRulesInstaller {
     try {
       await this.checkPrerequisites();
       await this.confirmInstallation();
-      await this.createDirectoryStructure();
+      await this.createRulesDirectory();
       await this.installRules();
-      await this.initializeProject();
       await this.setupUserRules();
       this.showSuccess();
     } catch (error) {
@@ -96,15 +95,15 @@ class CursorRulesInstaller {
 
   async confirmInstallation() {
     console.log(chalk.white('This installer will set up:'));
-    console.log(chalk.gray('  ✓ .cursor/rules/ directory with all workflow rules'));
-    console.log(chalk.gray('  ✓ Organized project structure (docs/, docs/specs/, docs/features/, blueprints/)'));
-    console.log(chalk.gray('  ✓ Template files and configuration'));
-    console.log(chalk.gray('  ✓ Interactive User Rules setup\n'));
+    console.log(chalk.gray('  ✓ .cursor/rules/ directory with all Cursor Rules'));
+    console.log(chalk.gray('  ✓ Core rules, modes, utilities, and templates'));
+    console.log(chalk.gray('  ✓ Latest rules downloaded from GitHub'));
+    console.log(chalk.gray('  ✓ User Rules template guidance\n'));
 
     const { proceed } = await inquirer.prompt([{
       type: 'confirm',
       name: 'proceed',
-      message: 'Continue with installation?',
+      message: 'Continue with Cursor Rules installation?',
       default: true
     }]);
 
@@ -114,25 +113,21 @@ class CursorRulesInstaller {
     }
   }
 
-  async createDirectoryStructure() {
-    const spinner = ora('Creating directory structure...').start();
+  async createRulesDirectory() {
+    const spinner = ora('Creating .cursor/rules directory...').start();
     
     const directories = [
       '.cursor/rules/core',
       '.cursor/rules/modes', 
       '.cursor/rules/utilities',
-      '.cursor/rules/templates',
-      'docs',
-      'docs/specs',
-      'docs/features',
-      'blueprints'
+      '.cursor/rules/templates'
     ];
 
     for (const dir of directories) {
       await fs.ensureDir(path.join(this.currentDir, dir));
     }
     
-    spinner.succeed('Directory structure created');
+    spinner.succeed('Rules directory created');
   }
 
   async installRules() {
@@ -207,42 +202,6 @@ class CursorRulesInstaller {
     }
   }
 
-  async initializeProject() {
-    const spinner = ora('Initializing project files...').start();
-    
-    try {
-      // Create task-index.json
-      const taskIndexResponse = await this.downloadWithRetry(
-        fileMapping.templates['task-index-template.json'], 
-        'task-index-template.json'
-      );
-      const taskIndex = JSON.parse(taskIndexResponse.data);
-      taskIndex.project_name = path.basename(this.currentDir);
-      
-      await fs.writeFile(
-        path.join(this.currentDir, 'task-index.json'),
-        JSON.stringify(taskIndex, null, 2)
-      );
-
-      // Create README files
-      const readmeFiles = {
-        'docs/README.md': '# Documentation\n\nThis directory contains project documentation, specifications, and feature definitions.',
-        'docs/features/README.md': '# Features\n\nThis directory contains feature specifications and requirements.',
-        'docs/specs/README.md': '# Specifications\n\nThis directory contains detailed technical specifications.',
-        'blueprints/README.md': '# Blueprints\n\nThis directory contains architectural blueprints and design templates.'
-      };
-
-      for (const [filepath, content] of Object.entries(readmeFiles)) {
-        await fs.writeFile(path.join(this.currentDir, filepath), content);
-      }
-      
-      spinner.succeed('Project files initialized');
-    } catch (error) {
-      spinner.fail('Failed to initialize project');
-      throw new Error(`Initialization failed: ${error.message}`);
-    }
-  }
-
   async setupUserRules() {
     const { setupUserRules } = await inquirer.prompt([{
       type: 'confirm',
@@ -278,14 +237,14 @@ class CursorRulesInstaller {
   }
 
   showSuccess() {
-    console.log(chalk.green.bold('\n🎉 Installation Complete!\n'));
+    console.log(chalk.green.bold('\n🎉 Cursor Rules Installed Successfully!\n'));
     
     console.log(chalk.white('Next steps:'));
     console.log(chalk.gray('1. Open Cursor in this project'));
-    console.log(chalk.gray('2. Try: ') + chalk.cyan('"bootstrap project structure"'));
-    console.log(chalk.gray('3. Then: ') + chalk.cyan('"Plan feature: User Authentication"'));
+    console.log(chalk.gray('2. Start using Cursor Agent with enhanced workflow rules'));
+    console.log(chalk.gray('3. Try: ') + chalk.cyan('"initialize project structure"') + chalk.gray(' (optional)'));
     
-    console.log(chalk.white('\nUseful commands:'));
+    console.log(chalk.white('\nTry these commands:'));
     console.log(chalk.gray('• ') + chalk.cyan('brainstorm ideas for [feature]'));
     console.log(chalk.gray('• ') + chalk.cyan('plan feature: [name]'));
     console.log(chalk.gray('• ') + chalk.cyan('work on TASK_001'));
