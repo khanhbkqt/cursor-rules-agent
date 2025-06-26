@@ -7,7 +7,7 @@ alwaysApply: true
 Orchestrate the entire workflow by **determining a single active mode** based on the project state.
 
 ## 🤖 **Mode Detection Logic (Distributed)**
-The agent MUST check these conditions by **iterating through all feature-specific index files**.
+**Pre-Check**: If `docs/activeContext.md` exists **AND** has a non-empty `currentMode` field, temporarily set `CURRENT_MODE = activeContext.currentMode` **unless** overridden by higher-priority triggers (critical bugs, explicit user command, missing structure, etc.). Then continue evaluation to confirm or override.
 
 ### 0. Check for `Brainstorming` Mode (Manual or Pending Blueprint)
 *   `IF` the user explicitly starts a brainstorming session (command contains the keyword `brainstorm` **OR**
