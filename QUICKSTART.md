@@ -12,7 +12,25 @@ Your project now has enhanced AI workflow rules in `.cursor/rules/`. Here's what
 cursor .
 ```
 
-### 2. **Test the Agent** (Try any of these)
+### 2. **Initialize Project Structure**
+**IMPORTANT**: Ask the Agent to set up the project structure first:
+
+```
+"initialize project structure"
+```
+
+This will create the full workflow system:
+```
+your-project/
+├── .cursor/rules/          ✅ Already installed
+├── docs/                   🆕 Documentation
+│   ├── specs/              🆕 Technical specifications  
+│   └── features/           🆕 Feature requirements
+├── blueprints/             🆕 Architectural templates
+└── task-index.json         🆕 Task management
+```
+
+### 3. **Test the Agent** (Try any of these)
 ```
 "What mode should I be in?"
 ```
@@ -23,25 +41,6 @@ The Agent will now intelligently detect which mode to operate in:
 - **⚙️ Developing Mode**: For writing code and implementation
 - **📚 Documenting Mode**: For updating docs and progress
 - **🐞 Bug-Fixing Mode**: For critical issue resolution
-
-## 🏗️ Optional: Initialize Project Structure
-
-If you want the full workflow system with task management:
-
-```
-"initialize project structure"
-```
-
-This will create:
-```
-your-project/
-├── .cursor/rules/          ✅ Already installed
-├── docs/                   🆕 Documentation
-│   ├── specs/              🆕 Technical specifications  
-│   └── features/           🆕 Feature requirements
-├── blueprints/             🆕 Architectural templates
-└── task-index.json         🆕 Task management
-```
 
 ## 🎮 Try These Commands
 

@@ -183,7 +183,13 @@ npx cursor-rules-agent-installer
 
 ### 🎯 After Installation
 
-Open Cursor in your project and try:
+1. **Open Cursor in your project**
+2. **Initialize project structure first** (required):
+```
+"initialize project structure"
+```
+
+3. **Start using the workflow**:
 ```
 "What mode should I be in?"
 ```
@@ -194,7 +200,7 @@ Then try commands like:
 ```
 "brainstorm ideas for user authentication"
 "plan feature: Shopping Cart"
-"initialize project structure" (optional)
+"work on TASK_001"
 ```
 
 ### 🤖 Smart Features
