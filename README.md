@@ -1,7 +1,8 @@
-# 🤖 Cursor Rules Agent v0.1.0
+# 🤖 Cursor Rules Agent v0.2.0
 **AI-Driven Development Workflow with Knowledge-Aware & Deterministic Architecture**
 
 ## 📑 Table of Contents
+- [What's New in v0.2](#whats-new-in-v02)
 - [Introduction](#introduction)
 - [System Architecture](#system-architecture)
 - [System Requirements](#system-requirements)
@@ -14,6 +15,29 @@
 - [Documentation References](#documentation-references)
 - [Contributing](#contributing)
 - [License](#license)
+
+## 🆕 What's New in v0.2
+
+### 🐞 **Comprehensive Bug Fixing Workflow**
+- **Automatic Bug-Fixing Mode**: System automatically switches to bug-fixing mode when critical issues are detected
+- **Emergency Hotfix Protocol**: Special workflow for blocker-severity bugs with immediate response
+- **Structured Bug Tracking**: Complete bug lifecycle management with severity levels and response times
+- **Git Integration**: Automated branch creation and structured commit messages for bug fixes
+
+### 🎯 **Enhanced Mode Detection**
+- **Improved Logic**: More accurate and deterministic mode identification
+- **Better Context Understanding**: Enhanced ability to understand user intent and switch modes appropriately
+- **Refined Master Orchestrator**: Updated algorithms for precise mode detection
+
+### 🔧 **Unified Commit Rules**
+- **Standardized Git Workflow**: Consistent commit message formatting across all modes
+- **Branch Naming Conventions**: Proper prefixes for different types of work (feat/, bugfix/, hotfix/)
+- **Structured Commits**: Clear commit descriptions with fixes and testing information
+
+### 📚 **Documentation Improvements**
+- **Complete Bug Workflow Guide**: Detailed documentation for bug detection and resolution
+- **Emergency Protocols**: Clear procedures for handling critical issues
+- **Enhanced Examples**: More comprehensive examples and use cases
 
 ## 🎯 Introduction
 
@@ -467,7 +491,7 @@ This project is distributed under the MIT License. See the [LICENSE](LICENSE) fi
 
 > 💡 **Core Philosophy**: Transform AI from a command executor into a partner capable of **understanding and utilizing deep project knowledge** automatically and efficiently.
 
-**Version**: 0.1.0 (First Release)  
+**Version**: 0.2.0 (Bug Fixing & Enhanced Detection)  
 **Repository**: https://github.com/khanhbkqt/cursor-rules-agent  
 **Last Updated**: January 2025
 
