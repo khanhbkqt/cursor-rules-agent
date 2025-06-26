@@ -78,18 +78,17 @@ The context loader now provides access to enhanced MCP tools based on the curren
     b. Do **NOT** load `safe-code-generation` (no code yet)
     c. Load preliminary `requirements/` docs provided by user for pending feature
     d. Prepare empty blueprint template from `templates/blueprint-template.yaml` **in-memory**
-    e. **Prepare documentation templates** from `templates/research-notes-template.md` and `templates/technology-analysis-template.md`
-    f. **Create `docs/ideas/` directory** if it doesn't exist for documentation storage
-    g. Expose helper `context.create_idea()` API to append to `docs/idea-backlog.md`
-    h. **Enable Enhanced MCP Tools**:
+    e. **Create `docs/ideas/` directory** if it doesn't exist for documentation storage
+    f. Expose helper `context.create_idea()` API to append to `docs/idea-backlog.md`
+    g. **Enable Enhanced MCP Tools**:
        - Enable **Web Search** for market research and trends
        - Provide **Context7 MCP** for technology exploration
        - Enable **Sequential Thinking** for structured ideation
        - Enable **Interactive MCP** for real-time stakeholder validation
-    i. **Documentation Creation Requirements**:
-       - Agent MUST create structured documentation files during research
-       - All MCP tool outputs MUST be documented in appropriate templates
-       - Cross-reference documentation files for Planning phase preparation
+    h. **Simple Documentation Requirements**:
+       - Agent MUST create feature folder: `docs/ideas/[feature-name]/`
+       - Agent MUST create 4 core files: requirements.md, research.md, analysis.md, summary.md
+       - All MCP tool outputs MUST be documented in appropriate files
 
 ## 🚫 Loading Restrictions
 - Entire `docs/tasks/active/` folder
@@ -103,10 +102,11 @@ The context loader now provides access to enhanced MCP tools based on the curren
 - **Documenting**: Limited to research and validation tools
 - **All Modes**: Interactive MCP should be used judiciously to avoid interrupting workflow
 
-### Enhanced Brainstorming Documentation Requirements:
-- **Web Search**: All findings MUST be documented in `docs/ideas/market-research.md`
-- **Context7 MCP**: Technology analysis MUST be captured in `docs/ideas/technology-analysis.md`
-- **Sequential Thinking**: Analysis frameworks MUST be saved in `docs/ideas/analysis-framework.md`
-- **Interactive MCP**: Stakeholder feedback MUST be recorded in `docs/ideas/stakeholder-feedback.md`
-- **Cross-Referencing**: All documentation files MUST reference each other for context
-- **Planning Handoff**: Complete documentation package MUST be ready for Planning mode transition
+### Simple Brainstorming Documentation Requirements:
+- **Feature Folder**: Create `docs/ideas/[feature-name]/` for each brainstorming session
+- **Requirements File**: User needs and stakeholder input in `requirements.md`
+- **Research File**: Market trends and technology analysis in `research.md`  
+- **Analysis File**: Risk assessment and prioritization in `analysis.md`
+- **Summary File**: Final recommendations and handoff info in `summary.md`
+- **MCP Integration**: All tool outputs documented in appropriate files
+- **Planning Handoff**: Summary file provides clear transition guidance
