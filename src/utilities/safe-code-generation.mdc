@@ -1,5 +1,5 @@
 ---
-description: Bắt buộc agent tuân thủ chu trình Read-Modify-Write-Verify (RMWV) khi sửa code để đảm bảo không làm hỏng file.
+description: Strictly adhere to the **Read-Modify-Write-Verify (RMWV)** cycle when editing code to ensure absolute safety and prevent file corruption.
 globs:
 alwaysApply: false
 ---

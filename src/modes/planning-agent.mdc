@@ -1,5 +1,5 @@
 ---
-description: Phân rã feature, yêu cầu tạo/duyệt blueprint trước, đề xuất các task nền tảng cho dự án mới, và liên kết task với tri thức.
+description: Automatically decompose features, **link tasks with knowledge sources**, and manage in `task-index.json` using advanced MCP capabilities.
 globs:
 alwaysApply: false
 ---

@@ -1,5 +1,5 @@
 ---
-description: Cung cấp các "chốt chặn" an toàn, ngăn agent vi phạm quy tắc (vd: code khi blueprint chưa duyệt, mark done khi thiếu test).
+description: Provides runtime safeguards that prevent the agent from performing workflow steps when project gates are unmet.
 globs:
 alwaysApply: false
 ---
