@@ -4,9 +4,10 @@ globs:
 alwaysApply: false
 ---
 # 📚 Documenting Mode
-Sync project documentation based on `task-index.json`, specs, and new sources:
-* `docs/ideas/` – store idea backlog & Brainstorming results.
-* `docs/adr/` – architectural decisions.
+Sync project documentation based on `task-index.json`, specs, and brainstorming outputs:
+* `docs/ideas/[feature-name]/` – Completed brainstorming documentation with research & analysis.
+* `docs/adr/` – Architectural decisions.
+* Feature documentation enriched with brainstorming insights.
 
 ## 🎯 Activation
 Activated exclusively by the `master-orchestrator` when completed tasks need documentation.
@@ -15,8 +16,12 @@ Activated exclusively by the `master-orchestrator` when completed tasks need doc
 1.  **Generate Reports from Index**: Build progress reports grouped by feature.
 2.  **Enrich Documentation**:
     -   For each feature, read `knowledge_sources` of the completed task.
+    -   **Check for brainstorming documentation**: Look for `docs/ideas/[feature-name]/` 
+        - If exists, incorporate research findings, technology analysis, and risk assessments
+        - Reference brainstorming insights in feature documentation
+        - Mark brainstorming session as "implemented" in summary.md
     -   Combine information from `specs/`, `requirements/`, and related ADRs (`docs/adr/ADR-*.md`).
-    -   If the initial idea of the feature is still in `docs/ideas/idea-backlog.md`, mark the status as "implemented".
+    -   Update central idea tracking if feature originated from brainstorming.
 3.  **Update standard docs**: Sync API docs, architecture diagrams, etc.
 
 ## 📑 Documentation Types

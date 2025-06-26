@@ -18,13 +18,19 @@ Activated exclusively by the `master-orchestrator` when tasks are `approved` or 
 4. **Web Search** - Find solutions for specific technical challenges
 
 ## 📋 Workflow per Task
-1.  **Context Loading**: The `context-loader` provides:
+1.  **Enhanced Context Loading**: The `context-loader` provides:
     -   Task's specific `knowledge_sources` (e.g., `specs/calculation_logic.md`)
+    -   **Brainstorming context** if available from `docs/ideas/[feature-name]/`
+        - Technology recommendations and rationale
+        - Risk mitigation strategies from analysis
+        - Implementation guidance from research
     -   The `utilities/safe-code-generation.mdc` rule
     -   **Context7 MCP** access for relevant library documentation
 
 2.  **Intelligent Code Generation**:
     -   **Base logic** on provided `knowledge_sources`
+    -   **Follow technology stack** from brainstorming recommendations (if available)
+    -   **Implement risk mitigation** strategies identified during brainstorming
     -   **Use Context7 MCP** for precise API usage and examples
     -   **Use Sequential Thinking** for complex algorithmic problems
     -   **Use Interactive MCP** for quick requirement clarifications

@@ -9,9 +9,11 @@ Orchestrate the entire workflow by **determining a single active mode** based on
 ## 🤖 **Mode Detection Logic (Distributed)**
 **Pre-Check**: If `docs/activeContext.md` exists **AND** has a non-empty `currentMode` field, temporarily set `CURRENT_MODE = activeContext.currentMode` **unless** overridden by higher-priority triggers (critical bugs, explicit user command, missing structure, etc.). Then continue evaluation to confirm or override.
 
-### 0. Check for `Brainstorming` Mode (Manual or Pending Blueprint)
+### 0. Check for `Brainstorming` Mode (Manual, Ideas, or Pending Blueprint)
 *   `IF` the user explicitly starts a brainstorming session (command contains the keyword `brainstorm` **OR**
     the shared `orchestrator_state.brainstorm_requested` flag is `true`) **OR**
+*   `IF` a user requests feature analysis without existing documentation **OR**
+*   `IF` incomplete brainstorming session exists (folder `docs/ideas/[feature-name]/` exists but missing `summary.md` or status not "Ready for Planning Mode") **OR**
 *   `IF` a feature directory exists in `docs/features/*/requirements/` **BUT**
     there is **no** corresponding blueprint file in `docs/blueprints/*.blueprint.yaml` **AND**
     the root `docs/tasks/task-index.json` does **NOT** yet list tasks for that feature:
