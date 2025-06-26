@@ -38,7 +38,29 @@ Each task must be a "Significant Unit of Work" (3-8 story points, testable outco
 - Detect new feature docs in `docs/features/*/requirements/`  
 - Task-index.json does not have tasks for the feature
 - Blueprint Gate1 **or** approved idea in `docs/ideas/idea-backlog.md`
+- **NEW**: Brainstorming handoff from `docs/ideas/[feature-name]/summary.md`
 - User request "plan feature X" or "create tasks"
+
+## 🎁 Brainstorming Integration
+
+### Handoff Detection
+Planning agent automatically detects when brainstorming has been completed by checking for:
+- `docs/ideas/[feature-name]/summary.md` with status "Ready for Planning Mode"
+- Complete documentation package: requirements.md, research.md, analysis.md
+
+### Brainstorming Context Usage
+When brainstorming handoff is detected:
+1. **Priority Source**: Use `summary.md` as primary requirements document
+2. **Technology Decisions**: Adopt recommended technology stack
+3. **Risk-Aware Planning**: Create tasks to address identified risks
+4. **Implementation Phases**: Follow suggested implementation phases
+5. **Detailed Context**: Reference other brainstorming files for deep context
+
+### Enhanced Blueprint Creation
+If no blueprint exists but brainstorming is complete:
+- Pre-populate blueprint with brainstorming technology choices
+- Include risk mitigation strategies from analysis
+- Set realistic timeline based on effort estimation
 
 ## Core Workflow: "Plan feature X"
 
@@ -80,8 +102,12 @@ Each task must be a "Significant Unit of Work" (3-8 story points, testable outco
     -   **IF EXISTS and `gate_status >= 1`**:
         1.  Proceed to the next step.
 
-2.  **Knowledge Gathering**:
+2.  **Enhanced Knowledge Gathering**:
     -   Read the approved blueprint
+    -   **CHECK for Brainstorming handoff**: Look for `docs/ideas/X/summary.md`
+        - If exists, prioritize this as primary requirements source
+        - Extract technology recommendations and risk mitigation strategies
+        - Use requirements/research/analysis files as detailed context
     -   Scan `docs/features/X/requirements/` for functional/non-functional specs
     -   Scan `docs/features/X/specs/` for detailed business logic
     -   **Use Context7 MCP** to validate technology stack and dependencies
@@ -91,9 +117,15 @@ Each task must be a "Significant Unit of Work" (3-8 story points, testable outco
 3.  **Systematic Task Decomposition** (Sequential Thinking):
     -   **Use Sequential Thinking** for comprehensive analysis:
       - Break down feature into logical components
+      - **Consider brainstorming recommendations** for implementation phases
+      - **Incorporate risk mitigation tasks** from brainstorming analysis
       - Identify dependencies between tasks
       - Validate task granularity (3-8 story points each)
       - Ensure each task has clear acceptance criteria
+    -   **Technology-informed task creation**:
+      - Use recommended technology stack from brainstorming
+      - Create setup/infrastructure tasks for new technologies
+      - Plan proof-of-concept tasks for risky components
     -   Generate meaningful tasks (Significant Units of Work)
     -   Each task self-contained within reasonable context
 
@@ -106,8 +138,12 @@ Each task must be a "Significant Unit of Work" (3-8 story points, testable outco
     -   Add all newly generated tasks to the `tasks` array within this file.
     -   Set initial task `status: "proposed"`.
 
-5.  **Report to User**:
-    -   Present the list of proposed tasks for review and approval.
+5.  **Enhanced Reporting**:
+    -   Present the list of proposed tasks for review and approval
+    -   **If brainstorming handoff used**: Reference brainstorming documentation
+    -   Highlight how risks from brainstorming analysis are addressed
+    -   Show technology choices alignment with brainstorming recommendations
+    -   Provide clear link between brainstorming insights and task breakdown
 
 ## 📋 Task Template Structure
 ```yaml
@@ -146,10 +182,25 @@ Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
 - Commit after creating feature structure or task decomposition
 
 ## 📊 Output Format
+
+### Standard Planning Output
 ```
 ✅ Planning Agent completed
 📋 Generated: 5 tasks
 👍 Approved: 3 tasks  
 ❌ Rejected: 2 tasks
 🎯 Ready for: Developing mode
+```
+
+### Enhanced Output (with Brainstorming Integration)
+```
+🎁 Brainstorming handoff detected: [feature-name]
+📚 Sources: summary.md, requirements.md, research.md, analysis.md
+🛠 Technology: [Recommended stack from brainstorming]
+⚠️  Risks addressed: [Number] risk mitigation tasks created
+📋 Generated: 8 tasks (including risk mitigation)
+👍 Approved: 6 tasks  
+❌ Rejected: 2 tasks
+🎯 Ready for: Developing mode
+📂 Brainstorming docs: docs/ideas/[feature-name]/
 ```
