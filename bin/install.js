@@ -10,7 +10,7 @@ const axios = require('axios');
 // Package info
 const packageInfo = {
   name: 'Cursor Rules Agent',
-  version: '0.2.1',
+  version: '0.3.0',
   github: 'https://github.com/khanhbkqt/cursor-rules-agent'
 };
 
@@ -45,7 +45,12 @@ const fileMapping = {
     'task-index-template.json': `${GITHUB_RAW_BASE}/src/templates/task-index-template.json`,
     'task-index-feature-template.json': `${GITHUB_RAW_BASE}/src/templates/task-index-feature-template.json`,
     'active-context-template.md': `${GITHUB_RAW_BASE}/src/templates/active-context-template.md`,
-    'bug-report-template.md': `${GITHUB_RAW_BASE}/src/templates/bug-report-template.md`
+    'bug-report-template.md': `${GITHUB_RAW_BASE}/src/templates/bug-report-template.md`,
+    'idea-requirements-template.md': `${GITHUB_RAW_BASE}/src/templates/idea-requirements-template.md`,
+    'idea-research-template.md': `${GITHUB_RAW_BASE}/src/templates/idea-research-template.md`,
+    'idea-analysis-template.md': `${GITHUB_RAW_BASE}/src/templates/idea-analysis-template.md`,
+    'idea-summary-template.md': `${GITHUB_RAW_BASE}/src/templates/idea-summary-template.md`,
+    'ideas-readme-template.md': `${GITHUB_RAW_BASE}/src/templates/ideas-readme-template.md`
   }
 };
 
@@ -97,6 +102,8 @@ class CursorRulesInstaller {
     console.log(chalk.white('This installer will set up:'));
     console.log(chalk.gray('  ✓ .cursor/rules/ directory with all Cursor Rules'));
     console.log(chalk.gray('  ✓ Core rules, modes, utilities, and templates'));
+    console.log(chalk.gray('  ✓ NEW: Structured brainstorming system with MCP tools'));
+    console.log(chalk.gray('  ✓ Enhanced workflow integration (Brainstorming → Planning → Developing)'));
     console.log(chalk.gray('  ✓ Latest rules downloaded from GitHub'));
     console.log(chalk.gray('  ✓ User Rules template guidance\n'));
 
@@ -229,7 +236,12 @@ class CursorRulesInstaller {
 1. Mode indicator at start
 2. Technical content with explanations  
 3. Proper markdown formatting
-4. Concise but thorough responses`;
+4. Concise but thorough responses
+
+## Enhanced Features v0.3.0
+- ALWAYS use Interactive MCP to get user's feedbacks
+- STRICTLY FETCH AND FOLLOW RULES
+- Leverage structured brainstorming for comprehensive analysis`;
       
       console.log(chalk.white(userRulesTemplate));
       console.log(chalk.gray('─'.repeat(60)));
@@ -244,11 +256,11 @@ class CursorRulesInstaller {
     console.log(chalk.gray('2. ') + chalk.cyan('Ask Agent: "initialize project structure"') + chalk.gray(' (required first step)'));
     console.log(chalk.gray('3. Try: ') + chalk.cyan('"What mode should I be in?"'));
     
-    console.log(chalk.white('\nAfter initialization, try these commands:'));
-    console.log(chalk.gray('• ') + chalk.cyan('brainstorm ideas for [feature]'));
-    console.log(chalk.gray('• ') + chalk.cyan('plan feature: [name]'));
+    console.log(chalk.white('\nAfter initialization, try these enhanced commands:'));
+    console.log(chalk.gray('• ') + chalk.cyan('brainstorm AI-powered customer service features'));
+    console.log(chalk.gray('• ') + chalk.cyan('plan feature: Shopping Cart'));
     console.log(chalk.gray('• ') + chalk.cyan('work on TASK_001'));
-    console.log(chalk.gray('• ') + chalk.cyan('update documentation'));
+    console.log(chalk.gray('• ') + chalk.cyan('update documentation for completed features'));
     
     console.log(chalk.white('\n📖 For detailed guidance: ') + chalk.cyan('QUICKSTART.md'));
     console.log(chalk.white(`🌐 Learn more: ${packageInfo.github}\n`));
