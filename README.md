@@ -185,11 +185,16 @@ npx cursor-rules-agent-installer
 
 Open Cursor in your project and try:
 ```
-"bootstrap project structure"
+"What mode should I be in?"
 ```
-Then:
+
+**📖 For step-by-step guidance, see [QUICKSTART.md](QUICKSTART.md)**
+
+Then try commands like:
 ```
-"Plan feature: User Authentication"
+"brainstorm ideas for user authentication"
+"plan feature: Shopping Cart"
+"initialize project structure" (optional)
 ```
 
 ### 🤖 Smart Features

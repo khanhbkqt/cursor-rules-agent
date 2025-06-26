@@ -242,15 +242,16 @@ class CursorRulesInstaller {
     console.log(chalk.white('Next steps:'));
     console.log(chalk.gray('1. Open Cursor in this project'));
     console.log(chalk.gray('2. Start using Cursor Agent with enhanced workflow rules'));
-    console.log(chalk.gray('3. Try: ') + chalk.cyan('"initialize project structure"') + chalk.gray(' (optional)'));
+    console.log(chalk.gray('3. Try: ') + chalk.cyan('"What mode should I be in?"'));
     
-    console.log(chalk.white('\nTry these commands:'));
+    console.log(chalk.white('\nQuick commands to try:'));
     console.log(chalk.gray('• ') + chalk.cyan('brainstorm ideas for [feature]'));
     console.log(chalk.gray('• ') + chalk.cyan('plan feature: [name]'));
     console.log(chalk.gray('• ') + chalk.cyan('work on TASK_001'));
-    console.log(chalk.gray('• ') + chalk.cyan('update documentation'));
+    console.log(chalk.gray('• ') + chalk.cyan('"initialize project structure"') + chalk.gray(' (optional)'));
     
-    console.log(chalk.white(`\nLearn more: ${packageInfo.github}\n`));
+    console.log(chalk.white('\n📖 For detailed guidance: ') + chalk.cyan('QUICKSTART.md'));
+    console.log(chalk.white(`🌐 Learn more: ${packageInfo.github}\n`));
   }
 }
 
