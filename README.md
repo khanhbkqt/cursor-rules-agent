@@ -34,6 +34,12 @@
 - **Branch Naming Conventions**: Proper prefixes for different types of work (feat/, bugfix/, hotfix/)
 - **Structured Commits**: Clear commit descriptions with fixes and testing information
 
+### ⚡ **Enhanced Installer**
+- **GitHub Integration**: Files downloaded directly from repository ensuring always up-to-date content
+- **Reliable Downloads**: Retry mechanism with error handling for network issues
+- **Complete Content**: All rules, templates, and utilities included (no more embedded/incomplete content)
+- **Faster Setup**: Streamlined installation process with better user feedback
+
 ### 📚 **Documentation Improvements**
 - **Complete Bug Workflow Guide**: Detailed documentation for bug detection and resolution
 - **Emergency Protocols**: Clear procedures for handling critical issues
@@ -124,10 +130,12 @@ npx cursor-rules-agent-installer
 ```
 
 That's it! The installer will:
+- ✅ **Download latest rules from GitHub** (always up-to-date content)
 - ✅ Create `.cursor/rules/` with all workflow rules
 - ✅ Set up organized project structure (`docs/specs/`, `docs/features/`, `blueprints/`)
 - ✅ Initialize `task-index.json` for task management
 - ✅ Provide User Rules template for Cursor Settings
+- ✅ **Reliable installation** with retry mechanism and error handling
 - ✅ Guide you through first steps
 
 ### ⚡ Git Installation (Alternative)
