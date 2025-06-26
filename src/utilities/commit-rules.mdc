@@ -1,5 +1,5 @@
 ---
-description:
+description: Standardized Git workflow and commit conventions for all modes in Cursor Rules Agent.
 globs:
 alwaysApply: false
 ---
