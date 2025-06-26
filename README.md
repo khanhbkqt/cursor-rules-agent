@@ -7,6 +7,7 @@
 - [System Requirements](#system-requirements)
 - [Installation Guide](#installation-guide)
 - [Workflow Operations](#workflow-operations)
+- [Bug Fixing Workflow](#bug-fixing-workflow)
 - [Cursor Agent & Rules](#cursor-agent--rules)
 - [Enhanced MCP Tools](#enhanced-mcp-tools)
 - [Extensions & Customization](#extensions--customization)
@@ -66,11 +67,16 @@ cursor-rules-agent/
 │   │   ├── brainstorming-mode.mdc
 │   │   ├── planning-agent.mdc
 │   │   ├── developing-mode.mdc
+│   │   ├── bug-fixing-mode.mdc     # NEW: Priority bug resolution
 │   │   └── documenting-mode.mdc
 │   ├── utilities/              # Support tools
 │   │   ├── safe-code-generation.mdc
 │   │   └── enforcer.mdc
 │   └── templates/              # Standard templates
+├── bugs/                       # NEW: Bug tracking & resolution
+│   ├── templates/
+│   │   └── bug-report-template.md
+│   └── bug-index.json
 ├── USER_RULES_TEMPLATE.md      # Template for Cursor User Rules setup
 └── README.md                   # This file
 ```
@@ -214,6 +220,93 @@ sequenceDiagram
    - Sync API docs
    - Update architecture diagrams
    - Mark implemented ideas
+
+## 🐞 Bug Fixing Workflow
+
+### Critical Bug Detection & Resolution
+
+**Cursor Rules Agent** includes a dedicated **Bug-Fixing Mode** that automatically takes priority when critical issues are detected:
+
+#### Automatic Bug-Fixing Mode Activation
+
+The system switches to Bug-Fixing Mode when:
+1. **Critical/Blocker bugs** exist in `bugs/bug-index.json` with status `open` or `in-progress`
+2. **Failing tests** are detected with critical impact (app crash, data corruption)
+3. **Manual trigger**: User types `fix bug` or `hotfix`
+
+#### Bug Workflow Operations
+
+1. **Report Bug**:
+   ```
+   "There's a memory leak in the orchestrator causing crashes"
+   ```
+   - Agent creates bug report using template
+   - Assigns severity level (blocker, critical, major, minor)
+   - Adds to `bugs/bug-index.json` tracking
+
+2. **Bug Fixing Process**:
+   ```
+   "fix bug BUG-2025-001"
+   ```
+   - **Step 1**: Create failing test (RED)
+   - **Step 2**: Root cause analysis using Sequential Thinking
+   - **Step 3**: Implement minimal, safe fix
+   - **Step 4**: Validate fix (GREEN)
+   - **Step 5**: Add regression test
+
+3. **Git Workflow for Bugs**:
+   ```bash
+   # Automatic branch creation
+   git checkout -b bugfix/BUG-2025-001-memory-leak
+   
+   # Structured commit messages
+   git commit -m "fix(orchestrator): resolve memory leak
+   
+   Fixes: BUG-2025-001
+   Root cause: event listeners not removed
+   Testing: added regression test"
+   ```
+
+#### Bug Severity Levels
+
+| Severity | Description | Response Time | Branch Type |
+|----------|-------------|---------------|-------------|
+| **Blocker** | System unusable | Immediate | `hotfix/` |
+| **Critical** | Major functionality broken | < 2 hours | `bugfix/` |
+| **Major** | Significant feature affected | < 1 day | `bugfix/` |
+| **Minor** | Small issues, workarounds exist | Next sprint | `feat/` |
+
+#### Emergency Hotfix Protocol
+
+For **severity: blocker** bugs:
+- Uses `hotfix/` branch prefix
+- Skips normal review process (direct merge allowed)
+- Triggers immediate deployment
+- Requires post-fix review within 24h
+
+#### Bug Tracking Structure
+
+```
+bugs/
+├── templates/
+│   └── bug-report-template.md    # Standardized bug reporting
+├── bug-index.json                # Central bug tracking
+└── YYYY-MM-DD-bug-name.md        # Individual bug reports
+```
+
+#### Sample Bug Index Entry
+```json
+{
+  "id": "BUG-2025-001",
+  "title": "Memory leak in orchestrator",
+  "severity": "critical",
+  "status": "resolved",
+  "created": "2025-01-15T10:30:00Z",
+  "resolved": "2025-01-15T12:45:00Z",
+  "commit": "abc123f",
+  "branch": "bugfix/BUG-2025-001-memory-leak"
+}
+```
 
 ## 🤖 Cursor Agent & Rules
 

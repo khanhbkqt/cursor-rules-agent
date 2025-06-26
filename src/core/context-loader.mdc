@@ -16,6 +16,15 @@ The context loader now provides access to enhanced MCP tools based on the curren
 ## 🛠 Core API
 `context-loader.load(intent, CURRENT_MODE, mcp_tools_config)`
 
+### Pre-Warm: Load Quick Context Snapshot
+0.  **Check for `docs/activeContext.md`**:
+    - If the file exists, parse its YAML Metadata block to quickly obtain:
+        - `currentMode` (fallback if orchestrator does not supply)
+        - `activeFeature`
+        - `activeTaskId`
+    - Use these values as **hints** to speed up subsequent look-ups (e.g., jump directly to the feature folder when searching for a task).
+    - If mismatch with provided `CURRENT_MODE`, **trust the orchestrator** but log the discrepancy for debugging.
+
 ### Process:
 1.  **Receive `CURRENT_MODE`** from the orchestrator.
 2.  **Locate & Load Task Context (if applicable)**:

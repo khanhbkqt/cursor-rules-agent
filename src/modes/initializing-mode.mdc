@@ -4,10 +4,10 @@ globs:
 alwaysApply: false
 ---
 # 🚀 Initializing Mode
-Initialize project structure, including `task-index.json` and `specs/` directory for deep documentation.
+Initialize complete project structure for Cursor Rules Agent, creating all necessary directories and initial files for project management.
 
 ## 🎯 Activation
-This mode is activated **exclusively** by the `master-orchestrator`'s detection logic when `docs/tasks/task-index.json` is missing.
+This mode is activated **exclusively** by the `master-orchestrator`'s detection logic when `docs/tasks/task-index.json` is missing, indicating a new project setup.
 
 ## 📁 Project Structure
 ```
@@ -20,8 +20,9 @@ docs/
 │           └── ...
 │       └── task-index.feature.json
 ├── tasks/
-│   ├── active/
 │   └── task-index.json
+bugs/
+|-- bug-index.json
 ...
 ```
 

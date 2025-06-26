@@ -51,7 +51,8 @@ The agent MUST check these conditions by **iterating through all feature-specifi
 2.  **LOAD CONTEXT** via `context-loader`, passing in the determined `CURRENT_MODE`.
 3.  **EXECUTE** user request within the context of the single active mode.
 4.  **UPDATE PROGRESS** in `task-index.json` and relevant files.
-5.  **TRANSITION** if necessary, by updating state that the next detection cycle will pick up.
+5.  **WRITE ACTIVE CONTEXT** → regenerate `docs/activeContext.md` from template capturing current snapshot.
+6.  **TRANSITION** if necessary, by updating state that the next detection cycle will pick up.
 
 ## 🔄 Mode Transition Philosophy
 **Modes are flexible workflows, NOT linear cycles.**
@@ -83,12 +84,6 @@ Each mode MUST load its corresponding rule file:
 - **Documenting Mode** → `modes/documenting-mode.mdc`
 - **Bug-Fixing Mode** → `modes/bug-fixing-mode.mdc`
 - **Brainstorming Mode** → `modes/brainstorming-mode.mdc`
-
-## 🌿 Shared Utilities (All Modes)
-All modes MUST also load these common utilities:
-- **Commit Rules** → `utilities/commit-rules.mdc` - Unified Git workflow for consistent version control
-- **Safe Code Generation** → `utilities/safe-code-generation.mdc` - R-M-W-V patterns
-- **Enforcer** → `utilities/enforcer.mdc` - Quality gates and validation
 
 The `context-loader` is responsible for loading these based on `CURRENT_MODE`. These mode files contain:
 - Specific behaviors and constraints for that mode
