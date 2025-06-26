@@ -48,13 +48,64 @@ Orchestrate the entire workflow by **determining a single active mode** based on
 -   `IF` none of the above conditions are met:
 -   `THEN` **CURRENT_MODE = Planning**. This is the default state for a ready project with no active tasks.
 
-## 🛠 Core Workflow (Updated)
-1.  **DETERMINE CURRENT_MODE** using the Mode Detection Logic above.
-2.  **LOAD CONTEXT** via `context-loader`, passing in the determined `CURRENT_MODE`.
-3.  **EXECUTE** user request within the context of the single active mode.
-4.  **UPDATE PROGRESS** in `task-index.json` and relevant files.
-5.  **WRITE ACTIVE CONTEXT** → regenerate `docs/activeContext.md` from template capturing current snapshot.
-6.  **TRANSITION** if necessary, by updating state that the next detection cycle will pick up.
+## 🛠 **MANDATORY Core Workflow (STRICTLY ENFORCED)**
+🚨 **CRITICAL**: ALL steps are REQUIRED. Skipping ANY step violates the orchestrator protocol.
+
+### **STEP-BY-STEP CHECKLIST (MUST COMPLETE ALL):**
+
+#### **1. 🔍 DETERMINE CURRENT_MODE** (REQUIRED)
+- [ ] **MUST** execute Mode Detection Logic above
+- [ ] **MUST** verify mode is valid (Brainstorming, Initializing, Developing, Documenting, Bug-Fixing, Planning)
+- [ ] **MUST** log determined mode for audit trail
+
+#### **2. 📦 LOAD CONTEXT** (REQUIRED) 
+- [ ] **MUST** call `context-loader.load(intent, CURRENT_MODE, mcp_tools_config)`
+- [ ] **MUST** verify all required rules and utilities are loaded
+- [ ] **MUST** validate context completeness before proceeding
+
+#### **3. ⚡ EXECUTE** (REQUIRED)
+- [ ] **MUST** execute user request within the determined mode context
+- [ ] **MUST** follow mode-specific rules and constraints
+- [ ] **MUST** use only mode-appropriate tools and utilities
+
+#### **4. 📊 UPDATE PROGRESS** (REQUIRED)
+- [ ] **MUST** update `task-index.json` if task status changes
+- [ ] **MUST** update feature-specific `task-index.feature.json` files
+- [ ] **MUST** update task `.md` files with progress and work logs
+- [ ] **MUST** commit changes following `utilities/commit-rules.mdc`
+
+#### **5. 📝 WRITE ACTIVE CONTEXT** (🚨 **MANDATORY** 🚨)
+**THIS STEP IS CRITICAL AND MUST NEVER BE SKIPPED**
+- [ ] **SHALL** regenerate `docs/activeContext.md` from current project state
+- [ ] **SHALL** update YAML frontmatter with current values:
+  - [ ] `currentMode`: Current determined mode
+  - [ ] `activeFeature`: Current feature being worked on  
+  - [ ] `activeTaskId`: Current/last completed task ID
+  - [ ] `lastUpdated`: Current timestamp (ISO format)
+  - [ ] `projectName`: Project identifier
+- [ ] **SHALL** update content sections with current progress
+- [ ] **SHALL** update next action recommendations
+- [ ] **SHALL** validate activeContext.md syntax and completeness
+
+#### **6. 🔄 TRANSITION** (CONDITIONAL)
+- [ ] **MUST** evaluate if mode transition is needed based on new state
+- [ ] **MUST** prepare state for next orchestrator cycle if transitioning
+- [ ] **MUST** log any mode transitions for audit trail
+
+### 🚨 **ENFORCEMENT PROTOCOL**
+**VIOLATION DETECTION**: If ANY step is skipped or incomplete:
+1. **🛑 IMMEDIATE HALT**: Stop all operations
+2. **⚠️ VIOLATION ALERT**: Report which step was skipped
+3. **🔄 REMEDIATION**: Complete the skipped step before proceeding
+4. **📝 AUDIT LOG**: Record the violation and remediation
+
+### ✅ **COMPLETION VERIFICATION**
+Before reporting results to user, **VERIFY ALL CHECKBOXES ARE COMPLETE**:
+- [ ] All 6 workflow steps completed
+- [ ] All required files updated
+- [ ] `docs/activeContext.md` reflects current state
+- [ ] Changes committed per commit rules
+- [ ] No violations detected
 
 ## 🔄 Mode Transition Philosophy
 **Modes are flexible workflows, NOT linear cycles.**
@@ -109,3 +160,18 @@ Before executing user intent that references a task in `proposed` status:
 2. If valid, update status to `developing` **and persist** in `task-index.json`.
 3. Log the transition for audit.
 4. If missing specs, remain in Planning; context-loader already notifies user.
+
+## 🔗 **Required Integrations** (MANDATORY)
+**This orchestrator MUST integrate with:**
+- **MUST call**: `context-loader.load(intent, CURRENT_MODE, mcp_tools_config)` (Step 2)
+- **MUST read**: `docs/activeContext.md` for initial state and validation
+- **MUST update**: `docs/activeContext.md` after EVERY operation (Step 5)
+- **MUST check**: `kpi-metrics.compliance()` before responding to user
+- **MUST respect**: `enforcer.validate()` for all mode transitions
+- **MUST trigger**: `commit-rules` auto-commit on status changes
+- **REPORTS to**: `kpi-metrics` for all violations and completions
+
+**Cross-Reference Verification**:
+- If ANY integration fails → **HALT** and remediate
+- All components form a circular verification loop
+- Final state MUST match initial intent

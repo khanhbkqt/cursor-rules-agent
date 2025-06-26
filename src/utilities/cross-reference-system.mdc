@@ -1,0 +1,233 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 🔗 Cross-Reference System & Reinforcement Loops
+**Unified integration map for all Cursor Rules Agent components**
+
+## 🎯 **Core Dependency Graph**
+
+```mermaid
+graph TB
+    MO[Master Orchestrator] -->|triggers| CL[Context Loader]
+    CL -->|validates| AC[activeContext.md]
+    AC -->|feeds state to| MO
+    
+    CL -->|loads| MR[Mode Rules]
+    MR -->|enforces| CR[Commit Rules]
+    CR -->|updates| AC
+    
+    MO -->|monitors| KPI[KPI Metrics]
+    KPI -->|reports to| ENF[Enforcer]
+    ENF -->|blocks invalid ops in| MO
+    
+    CR -->|triggers| GIT[Git Operations]
+    GIT -->|validates against| AC
+    
+    style AC fill:#ff6,stroke:#333,stroke-width:4px
+```
+
+## 📐 **Mandatory Integration Points**
+
+### 1. **Master Orchestrator ↔ Context Loader**
+```yaml
+orchestrator_outputs:
+  - current_mode: REQUIRED by context-loader
+  - mode_transition_flag: TRIGGERS context reload
+  - validation_state: BLOCKS execution if invalid
+
+context_loader_feedback:
+  - context_ready: REQUIRED before orchestrator.execute()
+  - missing_resources: FORCES mode change (Dev→Planning)
+  - activeContext_valid: GATES orchestrator progression
+```
+
+### 2. **Context Loader ↔ ActiveContext.md**
+```yaml
+bidirectional_sync:
+  loader_reads:
+    - pre_warm_hints: FROM activeContext.yaml
+    - last_known_state: FOR quick validation
+    - stale_check: IF >5min THEN regenerate
+  
+  loader_writes:
+    - AFTER_EVERY_OPERATION: update activeContext
+    - ON_MODE_CHANGE: full regeneration
+    - ON_VIOLATION: immediate sync
+```
+
+### 3. **All Modes → Commit Rules**
+```yaml
+mode_commit_triggers:
+  developing_mode:
+    - task_status_change → AUTO_COMMIT
+    - feature_completion → AUTO_COMMIT
+    - test_suite_pass → AUTO_COMMIT
+  
+  planning_mode:
+    - blueprint_creation → AUTO_COMMIT
+    - task_decomposition → AUTO_COMMIT
+  
+  ALL_MODES:
+    - BEFORE_MODE_TRANSITION → MANDATORY_COMMIT
+    - includes: activeContext.md IN EVERY COMMIT
+```
+
+### 4. **Enforcer ↔ All Components**
+```yaml
+enforcer_hooks:
+  pre_code_generation:
+    - validate: blueprint_exists AND gate_1_passed
+    - validate: knowledge_sources_exist
+    - on_fail: BLOCK and NOTIFY
+  
+  pre_status_update:
+    - validate: tests_pass AND docs_updated
+    - validate: activeContext_synced
+    - on_fail: PREVENT_UPDATE
+  
+  runtime_monitoring:
+    - watch: ALL_OPERATIONS
+    - report_to: kpi_metrics
+    - escalate_to: master_orchestrator
+```
+
+## 🔄 **Reinforcement Loops**
+
+### Loop 1: Context Synchronization Loop
+```
+1. Orchestrator determines mode
+2. Context Loader loads rules
+3. Mode executes with rules
+4. Commit Rules enforce updates
+5. activeContext.md updated
+6. Orchestrator reads updated context
+↺ REPEAT
+```
+
+### Loop 2: Compliance Validation Loop
+```
+1. KPI Metrics monitors operations
+2. Violations detected
+3. Enforcer blocks invalid actions
+4. Remediation triggered
+5. Metrics updated
+6. System health restored
+↺ CONTINUOUS
+```
+
+### Loop 3: Mode Transition Loop
+```
+1. Current mode completes task
+2. Commit rules trigger auto-commit
+3. activeContext reflects new state
+4. Orchestrator detects state change
+5. New mode determined
+6. Context reloaded for new mode
+↺ CYCLE
+```
+
+## 📊 **Cross-Reference Matrix**
+
+| Component | Depends On | Provides To | Validates | Blocks |
+|-----------|------------|-------------|-----------|---------|
+| Master Orchestrator | activeContext, KPI | current_mode, workflow | All steps complete | Invalid transitions |
+| Context Loader | Orchestrator, Files | Loaded context | activeContext fresh | Missing resources |
+| Commit Rules | All modes | Git history | Commit completeness | Uncommitted changes |
+| Enforcer | KPI, Rules | Protection | Blueprint gates | Invalid operations |
+| KPI Metrics | All components | Health status | Compliance rate | System failures |
+| activeContext.md | All updates | System state | YAML validity | Stale operations |
+
+## 🚨 **Mandatory Cross-References in Each File**
+
+### In master-orchestrator.mdc:
+```markdown
+## 🔗 Required Integrations
+- MUST call: `context-loader.load()` (Step 2)
+- MUST read: `activeContext.md` for state
+- MUST update: `activeContext.md` (Step 5)
+- MUST check: `kpi-metrics.compliance()`
+- MUST respect: `enforcer.validate()`
+```
+
+### In context-loader.mdc:
+```markdown
+## 🔗 Required Integrations
+- RECEIVES: current_mode from orchestrator
+- VALIDATES: activeContext.md freshness
+- LOADS: mode-specific rules
+- TRIGGERS: commit-rules on changes
+- REPORTS: to kpi-metrics
+```
+
+### In Each Mode File:
+```markdown
+## 🔗 Required Integrations
+- LOADED BY: context-loader
+- COMMITS VIA: commit-rules
+- UPDATES: activeContext.md
+- MONITORED BY: kpi-metrics
+- ENFORCED BY: enforcer
+```
+
+## 🔒 **Integration Enforcement Rules**
+
+### Rule 1: No Isolated Operations
+```yaml
+enforcement:
+  - NO component operates without activeContext.md
+  - NO mode executes without context-loader
+  - NO changes without commit-rules
+  - NO violations without kpi-metrics tracking
+```
+
+### Rule 2: Cascade Validation
+```yaml
+validation_chain:
+  1. orchestrator validates mode
+  2. context-loader validates resources
+  3. mode validates prerequisites
+  4. commit-rules validates changes
+  5. activeContext validates state
+  
+  ANY_FAILURE → HALT_ENTIRE_CHAIN
+```
+
+### Rule 3: Circular Verification
+```yaml
+verification_circle:
+  - orchestrator → context → execution → commit → activeContext → orchestrator
+  - Each step MUST verify previous step output
+  - Final state MUST match initial intent
+  - Mismatch → ROLLBACK and RETRY
+```
+
+## 📈 **Benefits of Cross-Reference System**
+
+1. **Zero Orphaned Operations**: Every action is tracked
+2. **Automatic Remediation**: Violations trigger fixes
+3. **State Consistency**: activeContext always accurate
+4. **Audit Trail**: Complete operation history
+5. **Performance Optimization**: Predictable workflows
+
+## 🔍 **Implementation Checklist**
+
+When implementing any new feature:
+- [ ] Update dependency graph
+- [ ] Add integration points
+- [ ] Create reinforcement loop
+- [ ] Update cross-reference matrix
+- [ ] Add to enforcement rules
+- [ ] Test circular verification
+- [ ] Update all affected components
+
+## 🚀 **Activation**
+
+This cross-reference system is:
+- **MANDATORY** for all components
+- **ENFORCED** by kpi-metrics
+- **VALIDATED** on every operation
+- **AUDITED** for compliance
+
+**Failure to maintain cross-references = CRITICAL VIOLATION**

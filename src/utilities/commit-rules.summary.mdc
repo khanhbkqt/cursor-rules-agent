@@ -1,0 +1,39 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 🌿 Commit Rules (Summary)
+**Quick reference for Git workflow - Full version: commit-rules.mdc**
+
+## 🚨 **AUTO-COMMIT TRIGGERS**
+- Task status change → **COMMIT**
+- Feature complete → **COMMIT**
+- Bug resolved → **COMMIT**
+- Mode transition → **COMMIT**
+- User requests → **COMMIT**
+
+**MUST include activeContext.md in ALL status commits**
+
+## 📝 **FORMAT**
+```
+<type>(<scope>): <description>
+
+[optional body]
+[optional footer]
+```
+
+**Types**: feat|fix|docs|style|refactor|test|chore|plan|idea
+
+## 🌿 **BRANCHES**
+- `feature/<task-id>-<slug>`
+- `bugfix/<bug-id>-<slug>`
+- `hotfix/<critical>-<slug>`
+- `docs/<doc-id>-<slug>`
+
+## ⚡ **QUICK COMMIT**
+```bash
+git add . && git commit -m "feat(auth): implement JWT middleware"
+```
+
+@import: utilities/shared-enforcement.mdc

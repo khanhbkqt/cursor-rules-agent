@@ -6,6 +6,58 @@ alwaysApply: false
 # 🌿 Unified Git Workflow & Commit Rules
 Standardized Git workflow and commit conventions for all modes in Cursor Rules Agent.
 
+## 🚨 **CRITICAL: AUTO-COMMIT INTEGRATION**
+**EVERY mode MUST integrate auto-commit checks into their workflow. Committing is NOT optional - it's part of task completion.**
+
+### 🔄 **MANDATORY COMMIT CHECKPOINTS**
+**STOP and CHECK for auto-commit triggers at these points:**
+
+1. **✅ Task Status Changes** 
+   - `proposed` → `developing` → **COMMIT** (+ update activeContext.md)
+   - `developing` → `done` → **COMMIT** (+ update activeContext.md)  
+   - `done` → `review` → **COMMIT** (+ update activeContext.md)
+
+2. **✅ Feature Milestones**
+   - Feature completion → **COMMIT** (+ update activeContext.md)
+   - Blueprint approval → **COMMIT** (+ update activeContext.md)
+   - Phase completion → **COMMIT** (+ update activeContext.md)
+
+3. **✅ Bug Status Changes**
+   - `open` → `in-progress` → **COMMIT** (+ update activeContext.md)
+   - `in-progress` → `resolved` → **COMMIT** (+ update activeContext.md)
+
+4. **✅ Documentation Updates**
+   - Major section completion → **COMMIT**
+   - ADR creation → **COMMIT**
+   - API documentation → **COMMIT**
+
+5. **✅ User Requests**
+   - "commit changes" mentioned → **COMMIT**
+   - Before switching modes → **COMMIT** (+ update activeContext.md)
+
+### 🚨 **ACTIVECONTEXT.MD UPDATE REQUIREMENT**
+**MANDATORY**: Every commit that includes task status changes, feature milestones, or mode transitions **MUST** also include an updated `docs/activeContext.md` file.
+
+**VERIFICATION CHECKLIST** (before every commit):
+- [ ] **REQUIRED**: `docs/activeContext.md` YAML frontmatter updated with current values
+- [ ] **REQUIRED**: `currentMode` reflects actual project state  
+- [ ] **REQUIRED**: `activeFeature` matches current working feature
+- [ ] **REQUIRED**: `activeTaskId` is current/completed task
+- [ ] **REQUIRED**: `lastUpdated` timestamp is current (ISO format)
+- [ ] **REQUIRED**: Content sections reflect current progress and next actions
+
+### 🛡️ **WORKFLOW INTEGRATION RULE**
+**NEVER report task completion, feature finish, or status changes to the user WITHOUT first:**
+1. **🚨 UPDATING `docs/activeContext.md`** with current state
+2. **💾 COMMITTING all changes** including activeContext.md  
+3. **✅ VERIFYING** activeContext.md reflects current project state
+
+**VIOLATION PROTOCOL**: If activeContext.md is not updated during status changes:
+1. **🛑 HALT**: Stop reporting to user
+2. **🔄 REMEDIATE**: Update activeContext.md immediately  
+3. **💾 COMMIT**: Commit the fix with appropriate message
+4. **📝 LOG**: Record the violation and remediation
+
 ## 🎯 Purpose
 Provide consistent version control practices across all modes (Planning, Developing, Bug-Fixing, Documenting, Brainstorming, and Initializing) to ensure clean Git history and efficient collaboration.
 
@@ -85,6 +137,20 @@ Testing: Added memory profiling tests
 
 ## 🔄 Commit Workflow
 
+### 🚨 **ENHANCED AUTO-COMMIT PROCESS**
+```
+1. [Make Changes]
+2. [Update Status/Documentation]
+3. 🛑 MANDATORY CHECK: "Does this trigger auto-commit?"
+   ├─ Task status changed? → YES: COMMIT NOW
+   ├─ Feature completed? → YES: COMMIT NOW  
+   ├─ Bug resolved? → YES: COMMIT NOW
+   ├─ Major documentation? → YES: COMMIT NOW
+   └─ User requested? → YES: COMMIT NOW
+4. [Execute Commit with proper message]
+5. [Continue with user communication]
+```
+
 ### 1. Pre-Commit Checks
 Always verify before committing:
 - ✅ Tests pass (if applicable)
@@ -114,13 +180,30 @@ git commit -m "<type>(<scope>): <description>"
 git push origin <branch-name>
 ```
 
-## 🚀 Auto-Commit Triggers
-Modes should auto-commit when:
-- Task status changes: `developing` → `done`
-- Blueprint gate status changes
-- Bug status: `open` → `resolved`
+## 🚀 **ENHANCED Auto-Commit Triggers**
+**These events REQUIRE immediate commit - NO EXCEPTIONS:**
+
+### 🔥 **CRITICAL TRIGGERS (Immediate Commit)**
+- ✅ Task status: `developing` → `done`
+- ✅ Feature completion (all tasks done)
+- ✅ Bug status: `open` → `resolved`
+- ✅ Blueprint created or updated
+- ✅ Documentation created or updated
+- ✅ User explicitly requests: "commit changes"
+
+### 📝 **STANDARD TRIGGERS (Commit Soon)**
 - Documentation milestone completed
-- User explicitly requests: "commit changes"
+- Major code implementation finished
+- Test suite additions
+- Configuration changes
+- Dependency updates
+
+### 🔧 **MODE-SPECIFIC TRIGGERS**
+- **Planning**: New blueprint created, tasks decomposed
+- **Developing**: Feature implementation finished, tests added
+- **Bug-Fixing**: Fix implemented, testing completed
+- **Documenting**: Major documentation section completed
+- **Brainstorming**: Ideas documented, summary created
 
 ## 🚨 Special Protocols
 
@@ -165,7 +248,7 @@ Each mode should:
 1. Import this utility: `@import utilities/commit-rules.mdc`
 2. Follow branch naming for their specific type
 3. Use appropriate commit types and scopes
-4. Implement auto-commit triggers where applicable
+4. **🚨 IMPLEMENT AUTO-COMMIT TRIGGERS** (MANDATORY)
 5. Maintain commit quality standards
 
 ## 📈 Benefits
@@ -174,3 +257,31 @@ Each mode should:
 - Automated changelog generation possible
 - Clear ownership and responsibility
 - Efficient code review process
+- **NO MISSING COMMITS** - Integrated workflow prevents oversight
+
+## 🔗 **Required Integrations** (MANDATORY)
+**These commit rules MUST integrate with:**
+- **TRIGGERED BY**: All modes on status changes
+- **VALIDATES**: `docs/activeContext.md` included in commits
+- **ENFORCES**: Auto-commit on critical triggers
+- **REPORTS**: to `kpi-metrics` for commit compliance
+- **BLOCKS**: Operations if uncommitted changes exist
+- **INTEGRATES**: with `enforcer` for validation
+
+**Auto-Commit Integration Points**:
+- Task status changes → **IMMEDIATE COMMIT**
+- Feature milestones → **IMMEDIATE COMMIT**
+- Mode transitions → **IMMEDIATE COMMIT**
+- activeContext updates → **MUST BE IN COMMIT**
+
+**Compliance Verification**:
+- Every commit MUST include activeContext.md if modified
+- Commit message MUST follow format rules
+- Branch naming MUST match conventions
+- NO proceeding without clean git status
+
+**Violation Handling**:
+- Uncommitted changes → **HALT** and commit
+- Missing activeContext → **BLOCK** and update
+- Format violations → **REJECT** and fix
+- Report ALL violations to KPI metrics

@@ -1,0 +1,213 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 📊 KPI Metrics & Success Criteria
+**Measurable performance indicators for Cursor Rules Agent workflow compliance**
+
+## 🎯 **CRITICAL SUCCESS METRICS (100% Required)**
+
+### 1. **Workflow Compliance Metrics**
+```yaml
+orchestrator_compliance:
+  target: 100%
+  measurement:
+    - all_6_steps_completed: binary (pass/fail)
+    - mode_detection_accuracy: percentage
+    - context_loading_success: percentage
+    - active_context_sync_rate: percentage
+  threshold: <100% = VIOLATION
+  
+context_sync_metrics:
+  activeContext_freshness: <5 minutes from last operation
+  yaml_validity: 100% valid
+  content_accuracy: 100% matches project state
+  update_frequency: every status change
+```
+
+### 2. **Mode Transition Metrics**
+```yaml
+mode_transitions:
+  valid_transitions: 100%
+  invalid_transitions: 0
+  transition_time: <2 seconds
+  rollback_count: 0
+  
+mode_accuracy:
+  correct_mode_detection: 100%
+  false_positives: 0
+  mode_override_count: track_for_analysis
+```
+
+### 3. **Commit Compliance Metrics**
+```yaml
+auto_commit_metrics:
+  status_change_commits: 100%
+  milestone_commits: 100%
+  activeContext_in_commits: 100%
+  uncommitted_changes: 0
+  
+commit_quality:
+  message_format_compliance: 100%
+  branch_naming_compliance: 100%
+  atomic_commits: 95%+
+```
+
+### 4. **Rule Violation Metrics**
+```yaml
+violation_tracking:
+  total_violations: 0 (target)
+  violation_types:
+    - skipped_steps: 0
+    - missing_context_update: 0
+    - uncommitted_status_change: 0
+    - invalid_mode_execution: 0
+  
+remediation_metrics:
+  auto_remediation_success: 100%
+  manual_intervention_required: 0
+  mean_time_to_remediate: <30 seconds
+```
+
+### 5. **Performance Metrics**
+```yaml
+execution_performance:
+  context_load_time: <1 second
+  mode_detection_time: <100ms
+  file_operation_success: 100%
+  mcp_tool_availability: 95%+
+  
+resource_efficiency:
+  memory_usage: <500MB
+  file_handles: <50 concurrent
+  api_calls: <100/minute
+```
+
+## 📈 **Real-time Monitoring Dashboard**
+
+### Binary Pass/Fail Criteria
+```markdown
+SYSTEM STATUS: [PASS ✅ / FAIL ❌]
+
+Required for PASS:
+- [ ] Orchestrator Compliance = 100%
+- [ ] Context Sync Rate = 100%
+- [ ] Auto-commit Coverage = 100%
+- [ ] Active Violations = 0
+- [ ] ActiveContext Freshness < 5min
+
+ANY unchecked = SYSTEM FAIL
+```
+
+### Continuous Metrics
+```typescript
+interface SystemHealthMetrics {
+  // Real-time measurements
+  currentMode: string;
+  lastModeTransition: timestamp;
+  activeContextAge: minutes;
+  pendingCommits: number;
+  violationCount: number;
+  complianceRate: percentage;
+  
+  // Historical tracking
+  dailyViolations: number[];
+  modeAccuracy7Day: percentage;
+  commitCompliance7Day: percentage;
+}
+```
+
+## 🔍 **Automated Compliance Checks**
+
+### Pre-execution Validation
+```yaml
+before_user_response:
+  validate:
+    - orchestrator_steps: all_completed
+    - context_state: synchronized
+    - git_status: clean_or_committed
+    - violations: none_active
+  action_on_fail: HALT_AND_REMEDIATE
+```
+
+### Post-execution Validation
+```yaml
+after_task_completion:
+  verify:
+    - task_status: updated_in_all_locations
+    - activeContext: regenerated_and_saved
+    - commits: created_with_context
+    - next_mode: correctly_determined
+  action_on_fail: ROLLBACK_AND_RETRY
+```
+
+## 📊 **Reporting & Analytics**
+
+### Daily Report Template
+```markdown
+## Daily Compliance Report - [DATE]
+
+### Executive Summary
+- Overall Compliance: XX%
+- Total Violations: X
+- System Health: [HEALTHY/WARNING/CRITICAL]
+
+### Detailed Metrics
+| Metric | Target | Actual | Status |
+|--------|--------|--------|--------|
+| Workflow Compliance | 100% | XX% | ✅/❌ |
+| Context Sync Rate | 100% | XX% | ✅/❌ |
+| Commit Coverage | 100% | XX% | ✅/❌ |
+| Mode Accuracy | 100% | XX% | ✅/❌ |
+
+### Violations Log
+- [timestamp] Type: Description - Status: Remediated/Pending
+
+### Recommendations
+- [Action items based on metrics]
+```
+
+## 🚨 **Alert Thresholds**
+
+```yaml
+alerts:
+  critical: # Immediate action required
+    - compliance_rate < 95%
+    - active_violations > 0
+    - context_sync_failure
+    - system_health = CRITICAL
+    
+  warning: # Monitor closely
+    - compliance_rate < 98%
+    - mode_accuracy < 95%
+    - commit_lag > 10 minutes
+    - performance_degradation > 20%
+    
+  info: # For tracking
+    - mode_transitions
+    - successful_remediations
+    - performance_optimizations
+```
+
+## 🔄 **Integration Points**
+
+This metrics system integrates with:
+- `master-orchestrator`: Reports step completion
+- `context-loader`: Tracks sync status
+- `commit-rules`: Monitors commit compliance
+- `enforcer`: Logs violations
+- All modes: Collects execution metrics
+
+## 📈 **Success Criteria**
+
+**System is considered successful when:**
+- 7-day rolling compliance average ≥ 99%
+- Zero critical violations in 24 hours
+- All binary metrics = PASS
+- User satisfaction score ≥ 4.5/5
+
+**Failure triggers automatic:**
+1. System diagnostic report
+2. Remediation plan generation
+3. User notification with resolution steps

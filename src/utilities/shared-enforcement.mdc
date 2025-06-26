@@ -1,0 +1,38 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 🛑 Shared Enforcement Protocols
+**Common enforcement patterns for all Cursor Rules Agent components**
+
+## 🚨 **VIOLATION PROTOCOL** (Compact)
+```
+VIOLATION → HALT → IDENTIFY → REMEDIATE → VERIFY → LOG
+```
+
+## 📋 **MANDATORY CHECKLIST**
+Before ANY response to user:
+- [ ] All steps completed
+- [ ] activeContext.md current (<5min)
+- [ ] Changes committed
+- [ ] No violations active
+
+**ANY unchecked = HALT**
+
+## 🔄 **ACTIVECONTEXT ENFORCEMENT**
+- **UPDATE**: After EVERY status change
+- **INCLUDE**: In ALL status commits
+- **VALIDATE**: YAML frontmatter complete
+- **FRESHNESS**: <5 minutes required
+
+## ⚡ **QUICK REFERENCE**
+| Violation | Action |
+|-----------|--------|
+| Missing Context | Update activeContext.md |
+| Stale State | Regenerate context |
+| Uncommitted | Auto-commit changes |
+| Failed Step | Complete & retry |
+
+## 🎯 **COMPLIANCE = 100%**
+**Zero tolerance for violations**

@@ -17,13 +17,16 @@ The context loader now provides access to enhanced MCP tools based on the curren
 `context-loader.load(intent, CURRENT_MODE, mcp_tools_config)`
 
 ### Pre-Warm: Load Quick Context Snapshot
-0.  **Check for `docs/activeContext.md`**:
-    - If the file exists, parse its YAML Metadata block to quickly obtain:
+0.  **Check for `docs/activeContext.md`** (MANDATORY FILE):
+    - **MUST** verify the file exists and is valid
+    - **MUST** parse its YAML Metadata block to obtain:
         - `currentMode` (fallback if orchestrator does not supply)
         - `activeFeature`
         - `activeTaskId`
+        - `lastUpdated` (validate not stale >24 hours)
     - Use these values as **hints** to speed up subsequent look-ups (e.g., jump directly to the feature folder when searching for a task).
     - If mismatch with provided `CURRENT_MODE`, **trust the orchestrator** but log the discrepancy for debugging.
+    - **CRITICAL**: If activeContext.md is missing or invalid → **HALT** and require regeneration
 
 ### Process:
 1.  **Receive `CURRENT_MODE`** from the orchestrator.
@@ -110,3 +113,56 @@ The context loader now provides access to enhanced MCP tools based on the curren
 - **Summary File**: Final recommendations and handoff info in `summary.md`
 - **MCP Integration**: All tool outputs documented in appropriate files
 - **Planning Handoff**: Summary file provides clear transition guidance
+
+## 🚨 **CONTEXT SYNCHRONIZATION ENFORCEMENT**
+
+### **MANDATORY POST-EXECUTION VALIDATION**
+After ANY context loading operation that results in task/feature/mode changes:
+
+**REQUIRED ACTIONS:**
+1. **🔄 UPDATE activeContext.md**: Synchronize with current project state
+2. **✅ VALIDATE YAML**: Ensure frontmatter is valid and complete
+3. **📝 UPDATE CONTENT**: Reflect current progress and next actions  
+4. **💾 PERSIST CHANGES**: Save activeContext.md before proceeding
+5. **🚨 VERIFY SYNC**: Confirm activeContext matches actual project state
+
+### **VALIDATION CHECKLIST** (MUST COMPLETE):
+- [ ] `currentMode` matches detected/active mode
+- [ ] `activeFeature` matches current working feature
+- [ ] `activeTaskId` matches current/completed task  
+- [ ] `lastUpdated` timestamp is current (within 1 hour)
+- [ ] Progress tables reflect actual task statuses
+- [ ] Next actions are accurate and actionable
+- [ ] No stale or outdated information present
+
+### **ENFORCEMENT PROTOCOL**:
+**IF activeContext.md is NOT updated after context changes:**
+1. **🛑 VIOLATION DETECTED**: Context desynchronization
+2. **⚠️ IMMEDIATE HALT**: Stop all operations
+3. **🔄 MANDATORY FIX**: Update activeContext.md before proceeding
+4. **📝 AUDIT LOG**: Record the violation and remediation
+5. **✅ VERIFICATION**: Confirm synchronization before continuing
+
+## 🔗 **Required Integrations** (MANDATORY)
+**This context loader MUST integrate with:**
+- **RECEIVES**: `current_mode` from master-orchestrator
+- **VALIDATES**: `docs/activeContext.md` freshness (<5 min)
+- **LOADS**: mode-specific rules from `modes/*.mdc`
+- **TRIGGERS**: `commit-rules` on any context changes
+- **REPORTS**: to `kpi-metrics` for loading success/failure
+- **RESPECTS**: `enforcer` validation gates
+- **UPDATES**: `docs/activeContext.md` after EVERY load operation
+
+**Integration Flow**:
+1. Receive mode from orchestrator
+2. Validate activeContext freshness
+3. Load appropriate rules and utilities
+4. Trigger commits for changes
+5. Update activeContext with new state
+6. Report metrics to KPI system
+
+**Failure Protocol**:
+- Missing activeContext → **HALT** and require regeneration
+- Stale context (>5min) → **AUTO-REGENERATE**
+- Missing resources → **FORCE** mode change to Planning
+- Load failure → **REPORT** to KPI and **ROLLBACK**

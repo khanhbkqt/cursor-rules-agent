@@ -10,7 +10,7 @@ const axios = require('axios');
 // Package info
 const packageInfo = {
   name: 'Cursor Rules Agent',
-  version: '0.3.0',
+  version: '0.3.1',
   github: 'https://github.com/khanhbkqt/cursor-rules-agent'
 };
 
@@ -36,7 +36,9 @@ const fileMapping = {
   utilities: {
     'safe-code-generation.mdc': `${GITHUB_RAW_BASE}/src/utilities/safe-code-generation.mdc`,
     'enforcer.mdc': `${GITHUB_RAW_BASE}/src/utilities/enforcer.mdc`,
-    'commit-rules.mdc': `${GITHUB_RAW_BASE}/src/utilities/commit-rules.mdc`
+    'commit-rules.mdc': `${GITHUB_RAW_BASE}/src/utilities/commit-rules.mdc`,
+    'kpi-metrics.mdc': `${GITHUB_RAW_BASE}/src/utilities/kpi-metrics.mdc`,
+    'cross-reference-system.mdc': `${GITHUB_RAW_BASE}/src/utilities/cross-reference-system.mdc`
   },
   
   templates: {
@@ -102,7 +104,8 @@ class CursorRulesInstaller {
     console.log(chalk.white('This installer will set up:'));
     console.log(chalk.gray('  ✓ .cursor/rules/ directory with all Cursor Rules'));
     console.log(chalk.gray('  ✓ Core rules, modes, utilities, and templates'));
-    console.log(chalk.gray('  ✓ NEW: Structured brainstorming system with MCP tools'));
+    console.log(chalk.gray('  ✓ NEW v0.3.1: KPI metrics & 100% compliance enforcement'));
+    console.log(chalk.gray('  ✓ NEW v0.3.1: Cross-reference system with reinforcement loops'));
     console.log(chalk.gray('  ✓ Enhanced workflow integration (Brainstorming → Planning → Developing)'));
     console.log(chalk.gray('  ✓ Latest rules downloaded from GitHub'));
     console.log(chalk.gray('  ✓ User Rules template guidance\n'));
@@ -238,10 +241,11 @@ class CursorRulesInstaller {
 3. Proper markdown formatting
 4. Concise but thorough responses
 
-## Enhanced Features v0.3.0
+## Enhanced Features v0.3.1
 - ALWAYS use Interactive MCP to get user's feedbacks
 - STRICTLY FETCH AND FOLLOW RULES
-- Leverage structured brainstorming for comprehensive analysis`;
+- 100% compliance enforcement with KPI metrics
+- Cross-reference system ensures zero isolated operations`;
       
       console.log(chalk.white(userRulesTemplate));
       console.log(chalk.gray('─'.repeat(60)));
