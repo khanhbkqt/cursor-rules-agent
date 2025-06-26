@@ -138,6 +138,13 @@ created: "2025-01-XX"
 - Nếu `task-index.json` bị corrupt -> báo lỗi và yêu cầu user xem xét.
 - Nếu không thể parse requirements -> hỏi user để làm rõ.
 
+## 🌿 Git Workflow
+Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
+- Branch naming: `planning/<feature-id>-<slug>` for planning activities
+- Commit messages: `plan(<scope>): <description>` format
+- Auto-commit when blueprint gate status changes or new tasks are created
+- Commit after creating feature structure or task decomposition
+
 ## 📊 Output Format
 ```
 ✅ Planning Agent completed

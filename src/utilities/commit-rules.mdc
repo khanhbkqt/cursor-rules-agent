@@ -1,0 +1,176 @@
+---
+description:
+globs:
+alwaysApply: false
+---
+# 🌿 Unified Git Workflow & Commit Rules
+Standardized Git workflow and commit conventions for all modes in Cursor Rules Agent.
+
+## 🎯 Purpose
+Provide consistent version control practices across all modes (Planning, Developing, Bug-Fixing, Documenting, Brainstorming, and Initializing) to ensure clean Git history and efficient collaboration.
+
+## 📋 When to Commit
+Each mode should commit when making significant changes:
+- **Planning Mode**: New blueprints, tasks, or feature structures
+- **Developing Mode**: Code implementation and feature completion
+- **Bug-Fixing Mode**: Bug fixes and patches
+- **Documenting Mode**: Documentation updates, ADRs, architecture diagrams
+- **Brainstorming Mode**: Idea backlog updates, blueprint drafts
+- **Initializing Mode**: Project structure setup
+
+## 🌿 Branch Naming Convention
+```
+<type>/<task-id>-<slug>
+```
+
+### Branch Types by Mode:
+- **feature/** - New features (Developing mode)
+- **bugfix/** - Bug fixes (Bug-Fixing mode)
+- **hotfix/** - Critical production fixes (Bug-Fixing mode)
+- **docs/** - Documentation updates (Documenting mode)
+- **planning/** - Planning and task creation (Planning mode)
+- **ideas/** - Brainstorming results (Brainstorming mode)
+- **setup/** - Project initialization (Initializing mode)
+- **enhance/** - Enhancements to existing features
+- **refactor/** - Code refactoring tasks
+
+### Examples:
+- `feature/TASK-001-user-authentication`
+- `bugfix/BUG-2025-001-memory-leak`
+- `docs/DOC-001-api-documentation`
+- `planning/FEAT-001-payment-integration`
+- `ideas/IDEA-001-mobile-app-concept`
+
+## 📝 Commit Message Format
+```
+<type>(<scope>): <description>
+
+[optional body]
+
+[optional footer]
+```
+
+### Commit Types:
+- **feat**: New feature
+- **fix**: Bug fix
+- **docs**: Documentation only changes
+- **style**: Code style changes (formatting, semicolons, etc.)
+- **refactor**: Code change that neither fixes a bug nor adds a feature
+- **test**: Adding or updating tests
+- **chore**: Routine tasks, maintenance
+- **plan**: Planning documents, blueprints, tasks
+- **idea**: Brainstorming results, idea backlog
+
+### Scopes by Mode:
+- **planning**: Blueprint creation, task decomposition
+- **auth, api, ui**: Feature-specific scopes
+- **core**: Core functionality changes
+- **config**: Configuration changes
+- **deps**: Dependency updates
+
+### Examples:
+```
+feat(auth): implement JWT middleware for API protection
+
+plan(payment): create blueprint and 5 initial tasks
+
+docs(api): update REST API documentation with v2 endpoints
+
+fix(memory): resolve memory leak in data processing service
+
+Fixes: BUG-2025-001
+Root cause: Circular reference in event listeners
+Testing: Added memory profiling tests
+```
+
+## 🔄 Commit Workflow
+
+### 1. Pre-Commit Checks
+Always verify before committing:
+- ✅ Tests pass (if applicable)
+- ✅ Linter clean (if applicable)
+- ✅ Documentation updated
+- ✅ Work log completed (in task/bug files)
+- ✅ Related indexes updated (task-index.json, bug-index.json)
+
+### 2. Commit Frequency
+- **During Development**: Commit logical units of work
+- **Feature Completion**: Final commit with comprehensive message
+- **Documentation**: Commit after each major section
+- **Planning**: Commit after blueprint approval or task creation
+
+### 3. Push Strategy
+```bash
+# Create and checkout branch
+git checkout -b <branch-type>/<id>-<slug>
+
+# Stage changes
+git add .
+
+# Commit with message
+git commit -m "<type>(<scope>): <description>"
+
+# Push to remote
+git push origin <branch-name>
+```
+
+## 🚀 Auto-Commit Triggers
+Modes should auto-commit when:
+- Task status changes: `developing` → `done`
+- Blueprint gate status changes
+- Bug status: `open` → `resolved`
+- Documentation milestone completed
+- User explicitly requests: "commit changes"
+
+## 🚨 Special Protocols
+
+### Emergency Hotfix
+For critical production issues:
+```bash
+# Use hotfix branch
+git checkout -b hotfix/<bug-id>-<description>
+
+# Fast-track commit
+git commit -m "hotfix(<scope>): emergency fix for <issue>
+
+CRITICAL: <description of critical issue>
+Impact: <affected systems>
+Testing: <verification approach>"
+
+# Direct push (skip normal review)
+git push origin hotfix/<branch>
+```
+
+### Large Feature Sets
+For multi-task features:
+```bash
+# Use feature branch with sub-tasks
+git checkout -b feature/<feature-id>-main
+
+# Commit each task separately
+git commit -m "feat(<scope>): [TASK-001] implement base structure"
+git commit -m "feat(<scope>): [TASK-002] add API endpoints"
+git commit -m "feat(<scope>): [TASK-003] create UI components"
+```
+
+## 📊 Commit Quality Guidelines
+1. **Atomic Commits**: Each commit should represent one logical change
+2. **Descriptive Messages**: Clear what and why
+3. **Reference Tracking**: Link to tasks, bugs, or issues
+4. **No Debug Code**: Remove console.logs, debug statements
+5. **No Generated Files**: Exclude build artifacts, dependencies
+
+## 🔗 Integration with Modes
+Each mode should:
+1. Import this utility: `@import utilities/commit-rules.mdc`
+2. Follow branch naming for their specific type
+3. Use appropriate commit types and scopes
+4. Implement auto-commit triggers where applicable
+5. Maintain commit quality standards
+
+## 📈 Benefits
+- Consistent Git history across all modes
+- Easy tracking of changes by type/scope
+- Automated changelog generation possible
+- Clear ownership and responsibility
+- Efficient code review process

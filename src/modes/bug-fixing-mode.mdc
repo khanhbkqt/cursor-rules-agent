@@ -1,0 +1,58 @@
+---
+description: Resolve critical or blocking bugs with highest priority, ensuring stability before continuing feature work.
+globs:
+alwaysApply: false
+---
+# 🐞 Bug-Fixing Mode
+Resolve critical or blocking bugs with highest priority, ensuring stability before continuing feature work.
+
+## 🎯 Activation
+Triggered exclusively by the `master-orchestrator` when **any** of the following is true:
+1. A task object has `type: "bug"` with `severity` = `critical` or `blocker` and `status` in `open | in-progress`.
+2. Current mode detects failing tests or runtime errors classified as *critical* (e.g., app crash, data corruption).
+3. Manual user request: message contains keyword `fix bug` or `hotfix`.
+
+Once activated, **all other modes are paused** until the bug is resolved.
+
+## 🧰 MCP Tools Integration
+1. **Sequential Thinking** – isolate root cause & design fix.
+2. **Interactive MCP** – clarify reproduction steps with user if unclear.
+3. **Context7 MCP** – check API usage correctness.
+4. **Web Search** – research known issues or patches.
+
+## 🗂 Required Context
+- The failing test or reproduction script
+- Related logs / stack traces
+- Impact analysis for severity verification
+- Previous bug history (if exists) from `bugs/bug-index.json`
+
+## 📋 Workflow
+1. **Reproduction Confirmation**
+   - Write or run a failing test demonstrating the bug (RED).
+2. **Root-Cause Analysis**
+   - Use Sequential Thinking to trace the defect.
+3. **Code Fix Implementation**
+   - Apply minimal, safe change → ensure R-M-W-V rules (`safe-code-generation.mdc`).
+4. **Validation**
+   - All tests green; add regression test if missing.
+5. **Documentation & Logging**
+   - Update the corresponding report in `bugs/` with a fix log (use template).
+   - Set status in `bug-index.json` to `resolved` and record resolution timestamp.
+6. **Commit & PR**
+   - Commit on branch `bugfix/<bug-id>-<slug>` with message `fix: <bug-title>`.
+   - (CI pipeline outside agent handles PR creation/merge review.)
+7. **Transition Out**
+   - On success → switch back to previously interrupted mode or default `Planning`.
+
+## 🏁 Completion Criteria
+- Failing test now passes + existing test suite passes ✅.
+- `bug-index.json` entry status = `resolved` and includes commit hash.
+- Work log in the bug report shows all steps completed.
+- User or CI approves hotfix merge.
+
+## 🌿 Git Workflow
+Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
+- Branch naming: `bugfix/<bug-id>-<slug>` or `hotfix/<bug-id>-<slug>` for critical bugs
+- Commit messages: `fix(<scope>): <bug-title>` with detailed body
+- Auto-commit when bug status changes to `resolved`
+- Emergency hotfix protocol for critical production issues

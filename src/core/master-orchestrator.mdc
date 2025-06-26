@@ -35,6 +35,13 @@ The agent MUST check these conditions by **iterating through all feature-specifi
     -   `IF` any task has `status: "done"` OR `status: "review"` AND docs are out-of-sync:
         -   `THEN` **CURRENT_MODE = Documenting**. Exit detection.
 
+### 1.5 Check for `Bug-Fixing` Mode
+-   `READ` root `bugs/bug-index.json` **IF EXISTS**.
+-   `IF` any bug has `severity` = `critical` or `blocker` **AND** `status` in `open | in-progress`:
+    -   `THEN` **CURRENT_MODE = Bug-Fixing**. Exit detection.
+-   `ELSE IF` the current runtime detects failing tests classified as critical (e.g., app crash) **OR** user explicitly types `fix bug` / `hotfix`:
+    -   `THEN` **CURRENT_MODE = Bug-Fixing**. Exit detection.
+
 ### 4. Default to `Planning` Mode
 -   `IF` none of the above conditions are met:
 -   `THEN` **CURRENT_MODE = Planning**. This is the default state for a ready project with no active tasks.
@@ -74,7 +81,14 @@ Each mode MUST load its corresponding rule file:
 - **Planning Mode** → `modes/planning-agent.mdc`  
 - **Developing Mode** → `modes/developing-mode.mdc`
 - **Documenting Mode** → `modes/documenting-mode.mdc`
+- **Bug-Fixing Mode** → `modes/bug-fixing-mode.mdc`
 - **Brainstorming Mode** → `modes/brainstorming-mode.mdc`
+
+## 🌿 Shared Utilities (All Modes)
+All modes MUST also load these common utilities:
+- **Commit Rules** → `utilities/commit-rules.mdc` - Unified Git workflow for consistent version control
+- **Safe Code Generation** → `utilities/safe-code-generation.mdc` - R-M-W-V patterns
+- **Enforcer** → `utilities/enforcer.mdc` - Quality gates and validation
 
 The `context-loader` is responsible for loading these based on `CURRENT_MODE`. These mode files contain:
 - Specific behaviors and constraints for that mode

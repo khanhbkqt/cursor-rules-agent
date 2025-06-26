@@ -46,6 +46,13 @@ Activated exclusively by the `master-orchestrator` when tasks are `approved` or 
 - [2025-01-XX 17:00] ✅ Resolved config issue
 ```
 
+## 🌿 Git Workflow
+Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
+- Branch naming: `feature/<task-id>-<slug>` for feature tasks
+- Commit messages: `feat(<scope>): <description>` format
+- Auto-commit when task status changes to `done` or `review`
+- Quality checks before committing
+
 ## 📊 Progress Updates
 Auto-update `progress-tracking.md`:
 - Task status: planning → developing → review → done

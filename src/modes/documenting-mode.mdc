@@ -60,5 +60,12 @@ Feature Docs:
 - [ ] Spelling/grammar check
 - [ ] Peer review completed
 
+## 🌿 Git Workflow
+Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
+- Branch naming: `docs/<doc-id>-<slug>` for documentation updates
+- Commit messages: `docs(<scope>): <description>` format
+- Auto-commit when documentation milestone is completed
+- Commit after major documentation sections or ADR creation
+
 ## 🔄 Next Mode
 **Planning** when docs are synced and idea backlog is empty or all blueprint Gate1.

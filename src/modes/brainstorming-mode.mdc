@@ -118,6 +118,13 @@ Initialize and analyze new feature ideas before transitioning to Planning, lever
 - [Feature Name]: Ready for blueprint creation
 ```
 
+## 🌿 Git Workflow
+Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
+- Branch naming: `ideas/<idea-id>-<slug>` for brainstorming activities
+- Commit messages: `idea(<scope>): <description>` format
+- Auto-commit when idea backlog is updated or blueprint drafts are created
+- Commit after completing research or stakeholder validation
+
 ## 🔄 Transition Strategy
 - When user selects **Approve Ideas** → Orchestrator sets `brainstorm_requested = false`, switch to `CURRENT_MODE = Planning`
 - Include MCP research findings in blueprint creation

@@ -31,9 +31,12 @@ docs/
 3. **Generate `task-index.feature.json`** from `templates/task-index-feature-template.json`.
 4. **Set completion flag** to orchestrator to switch mode.
 
-## 🔄 Next mode
-**Planning** - a transition which will be automatically detected by the orchestrator.
-
+## 🌿 Git Workflow
+Follow the unified commit rules defined in `utilities/commit-rules.mdc` for:
+- Branch naming: `setup/<setup-id>-<slug>` for initialization activities
+- Commit messages: `chore(setup): <description>` format
+- Auto-commit after project structure is created
+- Initial commit with complete project scaffold
 
 ## 🔄 Next mode
 **Planning** - to start decomposing features into tasks.
