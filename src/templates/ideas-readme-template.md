@@ -1,6 +1,6 @@
-# 💡 Ideas Documentation
+# 💡 Ideas Documentation Template
 
-Simple organization for brainstorming documentation.
+Template for organizing brainstorming documentation.
 
 ## Structure
 
@@ -11,8 +11,7 @@ docs/ideas/
 │   ├── research.md          # Market trends, technology analysis  
 │   ├── analysis.md          # Risk assessment, prioritization
 │   └── summary.md           # Final recommendations for Planning
-├── idea-backlog.md          # Central tracking of all ideas
-└── README.md                # This file
+└── idea-backlog.md          # Central tracking of all ideas
 ```
 
 ## Usage
