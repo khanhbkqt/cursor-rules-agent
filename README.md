@@ -1,4 +1,4 @@
-# 🤖 Cursor Rules Agent v1.0
+# 🤖 Cursor Rules Agent v0.1.0
 **AI-Driven Development Workflow with Knowledge-Aware & Deterministic Architecture**
 
 ## 📑 Table of Contents
@@ -85,7 +85,34 @@ cursor-rules-agent/
 
 ## 🚀 Installation Guide
 
-### Quick Setup (5 minutes)
+### ⚡ Super Quick Setup (1 minute) - Recommended
+
+**Using NPX (No installation needed):**
+```bash
+cd your-project
+npx cursor-rules-agent-installer
+```
+
+That's it! The installer will:
+- ✅ Create `.cursor/rules/` with all workflow rules
+- ✅ Set up organized project structure (`docs/specs/`, `docs/features/`, `blueprints/`)
+- ✅ Initialize `task-index.json` for task management
+- ✅ Provide User Rules template for Cursor Settings
+- ✅ Guide you through first steps
+
+### ⚡ Git Installation (Alternative)
+
+**Install directly from GitHub:**
+```bash
+cd your-project
+npm install https://github.com/khanhbkqt/cursor-rules-agent.git
+npx cursor-rules-agent-installer
+```
+
+### 🛠️ Manual Setup (Advanced)
+
+<details>
+<summary>Click to expand manual installation steps</summary>
 
 1. **Copy rules to your project**:
    ```bash
@@ -100,24 +127,38 @@ cursor-rules-agent/
    - Open Cursor Settings > Rules
    - Copy content from [`USER_RULES_TEMPLATE.md`](USER_RULES_TEMPLATE.md) to your User Rules
    - Customize communication style and preferences to your liking
-   - These settings will apply to ALL your Cursor projects
 
 3. **Bootstrap project structure**:
-   Open Cursor and type:
-   ```
-   "bootstrap project structure"
-   ```
-   Agent will automatically create `docs/`, `features/`, `specs/`, and `task-index.json` structure.
-
-4. **Test with first feature**:
-   ```
-   "Plan feature: User Authentication"
+   ```bash
+   mkdir -p docs/{specs,features} blueprints
    ```
 
-### Smart Setup (10 minutes) 🤖⭐
+4. **Create task-index.json**:
+   ```json
+   {
+     "project": { "name": "your-project", "version": "1.0.0" },
+     "features": {}, "tasks": {}, "completed": {},
+     "statistics": { "total_tasks": 0, "completed_tasks": 0 }
+   }
+   ```
+</details>
+
+### 🎯 After Installation
+
+Open Cursor in your project and try:
+```
+"bootstrap project structure"
+```
+Then:
+```
+"Plan feature: User Authentication"
+```
+
+### 🤖 Smart Features
 
 - **Auto-generate rules**: `"Generate rule for consistent API error responses"`
 - **Self-optimize**: `"Analyze my code and suggest project-specific rules"`
+- **Mode detection**: System automatically switches between modes based on your requests
 
 ## 🔄 Workflow Operations
 
@@ -333,8 +374,8 @@ This project is distributed under the MIT License. See the [LICENSE](LICENSE) fi
 
 > 💡 **Core Philosophy**: Transform AI from a command executor into a partner capable of **understanding and utilizing deep project knowledge** automatically and efficiently.
 
-**Version**: 1.0 (Release Candidate)  
-**Maintainers**: AI Development Team  
+**Version**: 0.1.0 (First Release)  
+**Repository**: https://github.com/khanhbkqt/cursor-rules-agent  
 **Last Updated**: January 2025
 
 ### 🚀 Quick Links
