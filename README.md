@@ -1,9 +1,9 @@
-# 🤖 Cursor Rules Agent v0.2.2
-**AI-Driven Development Workflow with Knowledge-Aware & Deterministic Architecture**
+# 🤖 Cursor Rules Agent v0.3.0
+**AI-Driven Development Workflow with Structured Brainstorming & Knowledge-Aware Architecture**
 
 ## 📑 Table of Contents
 - [Quick Start](#quick-start)
-- [What's New in v0.2](#whats-new-in-v02)
+- [What's New in v0.3](#whats-new-in-v03)
 - [Introduction](#introduction)
 - [System Architecture](#system-architecture)
 - [System Requirements](#system-requirements)
@@ -17,6 +17,32 @@
 - [Documentation References](#documentation-references)
 - [Contributing](#contributing)
 - [License](#license)
+
+## 🆕 What's New in v0.3
+
+### 🧠 **Structured Brainstorming System**
+- **Organized Documentation**: Feature-based folder structure `docs/ideas/[feature-name]/` with 4 core files
+- **Research-Driven**: Systematic market research, technology analysis, and risk assessment
+- **MCP Tools Integration**: Enhanced brainstorming with Web Search, Context7, Sequential Thinking, and Interactive MCP
+- **Planning Handoff**: Seamless transition from brainstorming to planning with comprehensive summary packages
+
+### 🔄 **Complete Workflow Integration**
+- **Mode Synchronization**: All modes (Brainstorming → Planning → Developing → Documenting) work together seamlessly
+- **Context Awareness**: Each mode understands and uses outputs from previous modes
+- **Technology Consistency**: Brainstorming recommendations flow through planning to development
+- **Risk-Aware Development**: Risk mitigation strategies from brainstorming are implemented as tasks
+
+### 📚 **Enhanced Documentation Templates**
+- **Simple Templates**: 4 core files per feature - requirements, research, analysis, summary
+- **Structured Organization**: Clear folder hierarchy for better knowledge management
+- **Cross-Mode References**: Documentation links between brainstorming, planning, and development phases
+- **Knowledge Accumulation**: Reusable insights for future features
+
+### 🛠 **MCP Tools Enhancement**
+- **Comprehensive Research**: Web search for market trends and competitive analysis
+- **Technology Validation**: Context7 integration for library and framework research
+- **Structured Analysis**: Sequential thinking for systematic evaluation and prioritization
+- **Real-time Validation**: Interactive MCP for stakeholder feedback during brainstorming
 
 ## 🆕 What's New in v0.2
 
@@ -106,19 +132,34 @@ cursor-rules-agent/
 │   │   └── context-loader.mdc
 │   ├── modes/                  # Operating modes
 │   │   ├── initializing-mode.mdc
-│   │   ├── brainstorming-mode.mdc
-│   │   ├── planning-agent.mdc
-│   │   ├── developing-mode.mdc
-│   │   ├── bug-fixing-mode.mdc     # NEW: Priority bug resolution
-│   │   └── documenting-mode.mdc
+│   │   ├── brainstorming-mode.mdc   # Enhanced: Structured brainstorming
+│   │   ├── planning-agent.mdc       # Enhanced: Brainstorming integration
+│   │   ├── developing-mode.mdc      # Enhanced: Context-aware development
+│   │   ├── bug-fixing-mode.mdc      # Priority bug resolution
+│   │   └── documenting-mode.mdc     # Enhanced: Insight preservation
 │   ├── utilities/              # Support tools
 │   │   ├── safe-code-generation.mdc
 │   │   └── enforcer.mdc
 │   └── templates/              # Standard templates
-├── bugs/                       # NEW: Bug tracking & resolution
+│       ├── idea-requirements-template.md     # NEW: Brainstorming templates
+│       ├── idea-research-template.md         # NEW: Research template
+│       ├── idea-analysis-template.md         # NEW: Analysis template
+│       ├── idea-summary-template.md          # NEW: Handoff template
+│       └── ideas-readme-template.md          # NEW: Documentation guide
+├── bugs/                       # Bug tracking & resolution
 │   ├── templates/
 │   │   └── bug-report-template.md
 │   └── bug-index.json
+├── docs/                       # Project documentation (created during use)
+│   ├── ideas/                  # NEW: Brainstorming documentation
+│   │   └── [feature-name]/     # Feature-specific brainstorming
+│   │       ├── requirements.md # User needs & stakeholder input
+│   │       ├── research.md     # Market & technology research
+│   │       ├── analysis.md     # Risk assessment & prioritization
+│   │       └── summary.md      # Planning handoff package
+│   ├── features/               # Feature documentation
+│   ├── blueprints/             # Architectural blueprints
+│   └── tasks/                  # Task management
 ├── USER_RULES_TEMPLATE.md      # Template for Cursor User Rules setup
 └── README.md                   # This file
 ```
@@ -246,58 +287,74 @@ Try these enhanced commands:
 
 ## 🔄 Workflow Operations
 
-### Knowledge-Aware Workflow
+### Enhanced Knowledge-Aware Workflow
 
 ```mermaid
 sequenceDiagram
     participant User
+    participant Brainstorming as 🧠 Brainstorming
+    participant Ideas as 💡 Ideas Docs
     participant Planning as 🤖 Planning
-    participant Spec as 📄 Spec
     participant Task as 📝 Task
     participant Coding as 🧑‍💻 Coding
 
-    User->>Planning: "Plan feature X"
-    Planning->>Spec: Scan specs/ for logic
-    Planning->>Task: Create TASK_001<br>+ link to Spec
-    User->>Coding: "Work on TASK_001"
+    User->>Brainstorming: "brainstorm e-commerce features"
+    Brainstorming->>Ideas: Create docs/ideas/feature-name/<br/>4 files: requirements, research, analysis, summary
+    User->>Planning: "plan feature X" (or automatic handoff)
+    Planning->>Ideas: Read summary.md + tech recommendations
+    Planning->>Task: Create TASK_001 with<br/>brainstorming context
+    User->>Coding: "work on TASK_001"
     Coding->>Task: Read knowledge_sources
-    Coding->>Spec: Load linked spec file
-    Coding->>Coding: Code with deep knowledge
+    Coding->>Ideas: Load brainstorming insights
+    Coding->>Coding: Code with complete context
 ```
 
 ### Detailed Workflow Steps
 
-1. **Brainstorming** (Optional):
+1. **Brainstorming** (Enhanced):
    ```
-   "start brainstorming for new e-commerce features"
+   "brainstorm AI-powered customer service features"
    ```
-   - Collect and filter ideas using enhanced MCP tools
-   - Create Idea Backlog with RICE analysis
-   - Leverage web search and library research for inspiration
+   - **Structured Research**: Market analysis, technology exploration, competitive analysis
+   - **MCP Tools Integration**: Web search, Context7, Sequential Thinking, Interactive MCP
+   - **Organized Documentation**: Creates `docs/ideas/[feature-name]/` with 4 core files:
+     - `requirements.md` - User needs and stakeholder input
+     - `research.md` - Market trends and technology analysis  
+     - `analysis.md` - Risk assessment and prioritization
+     - `summary.md` - Final recommendations for Planning handoff
 
-2. **Planning**:
+2. **Planning** (Brainstorming-Aware):
    ```
-   "Plan feature: Shopping Cart"
+   "plan feature: Shopping Cart"
    ```
-   - Create Blueprint if not exists
-   - Decompose into meaningful tasks
-   - Link with knowledge sources
+   - **Auto-detect brainstorming handoff** from `summary.md`
+   - **Use technology recommendations** from brainstorming research
+   - **Create risk mitigation tasks** based on brainstorming analysis
+   - **Follow implementation phases** suggested by brainstorming
+   - Create Blueprint with pre-populated insights
+   - Decompose into meaningful tasks with complete context
 
-3. **Developing**:
+3. **Developing** (Context-Enhanced):
    ```
-   "Start working on TASK_001"
+   "work on TASK_001"
    ```
-   - Agent loads related specs
-   - Code with the **RMWV + Surgical Edit** safety pattern to ensure precise and safe file modifications.
+   - **Load brainstorming context** with technology recommendations
+   - **Follow technology stack** from brainstorming recommendations
+   - **Implement risk mitigation** strategies identified during brainstorming
+   - Agent loads related specs and knowledge sources
+   - Code with the **RMWV + Surgical Edit** safety pattern to ensure precise and safe file modifications
    - Real-time progress updates
 
-4. **Documenting**:
+4. **Documenting** (Insight-Enriched):
    ```
-   "Update documentation for completed features"
+   "update documentation for completed features"
    ```
-   - Sync API docs
-   - Update architecture diagrams
-   - Mark implemented ideas
+   - **Incorporate brainstorming insights** into feature documentation
+   - **Reference research findings** and technology analysis
+   - **Mark brainstorming sessions** as implemented in summary.md
+   - Sync API docs with technology decisions from brainstorming
+   - Update architecture diagrams with implemented solutions
+   - Create comprehensive feature documentation
 
 ## 🐞 Bug Fixing Workflow
 
