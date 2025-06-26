@@ -46,10 +46,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   - Users can optionally use "initialize project structure" command after installation
 
 ### 📚 Documentation
+- **Added QUICKSTART.md**: Comprehensive 5-minute guide for new users
+  - Step-by-step instructions for immediate use after installation
+  - Clear examples for each mode (Brainstorming, Planning, Developing, etc.)
+  - Mode detection table with command examples
+  - Enhanced AI capabilities explanation (Web Search, Context7, Sequential Thinking)
+  - Safety features and quality gates documentation
+  - Troubleshooting section and common issues
+  - Example workflow from idea to implementation
 - Updated README with enhanced installer benefits and simplified focus
 - Highlighted GitHub integration advantages in installation section
 - Added reliable installation notes and troubleshooting
 - Clarified installer scope and optional project setup
+- Enhanced installer success message to reference QUICKSTART.md
 
 ## [0.2.0] - 2025-06-26
 
